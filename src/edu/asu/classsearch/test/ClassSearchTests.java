@@ -1,4 +1,4 @@
-package edu.asu.classsearch;
+package edu.asu.classsearch.test;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -11,6 +11,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
+
+import edu.asu.classsearch.classsearchAutomation;
+
 import java.util.regex.*;
 
 public class ClassSearchTests {
