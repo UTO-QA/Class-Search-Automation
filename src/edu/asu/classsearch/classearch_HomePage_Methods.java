@@ -2,7 +2,6 @@ package edu.asu.classsearch;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.*;
 import cucumber.api.java.en.And;
-public class classearchmap {
+public class classearch_HomePage_Methods {
 	private static WebDriver driver;
 	private String url="https://webapp4-qa.asu.edu/catalog";
 	public void getconn(){
@@ -22,19 +21,49 @@ public class classearchmap {
 	public void closeconn(){
 		driver.close();
 	}
-	public static void subject(String Searchterm){
+	private static WebElement property_subject(){
 		WebElement elem=driver.findElement(By.id("subjectEntry"));
 		elem.clear();
+		return elem;
+	}
+	private static WebElement property_Number(){
+		WebElement elem=driver.findElement(By.id("catalogNbr"));
+		elem.clear();	
+		return elem;
+	}
+	private static WebElement property_keyword(){
+		WebElement elem=driver.findElement(By.id("keywords"));
+		elem.clear();
+		return elem;
+	}
+	//-----------------------------------------------------------------------------
+	public static void subject(String Searchterm){
+		WebElement elem= property_subject();
 		elem.sendKeys(Searchterm);
 	}
 	public static void subjectandnumber(String Searchterm,String number){
-		WebElement elem=driver.findElement(By.id("subjectEntry"));
-		WebElement elemnum=driver.findElement(By.id("catalogNbr"));
+		WebElement elem=property_subject();
+		WebElement elemnum=property_Number();
 		elem.clear();
 		elemnum.clear();
 		elem.sendKeys(Searchterm);
 		elemnum.sendKeys(number);
 	}
+	public static void Number(String number){
+		WebElement elem= property_Number();
+		elem.sendKeys(number);
+	}
+	public static void keyword(String keyword){
+		WebElement elem= property_keyword();
+		elem.sendKeys(keyword);
+	}
+	public static void keywordanddsubject(String Searchterm,String keyword){
+		WebElement elem=property_keyword();
+		WebElement elem_subject=property_subject();
+		elem.sendKeys(keyword);
+		elem_subject.sendKeys(Searchterm);
+	}
+	//---------------------------------------------------------------------------------
 	public static void performsearch(){
 		WebElement elem=driver.findElement(By.xpath("//a[@id='Go']"));
 		WebDriverWait wait = new WebDriverWait(driver,30); //this is explicit wait
