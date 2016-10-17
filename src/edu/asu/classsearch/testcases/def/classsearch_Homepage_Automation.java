@@ -1,4 +1,4 @@
-package edu.asu.classsearch;
+package edu.asu.classsearch.testcases.def;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.hamcrest.CoreMatchers;
@@ -9,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.asu.classsearch.classearch_HomePage_Methods;
 import junit.framework.Assert;
 
 public class classsearch_Homepage_Automation {
