@@ -1,4 +1,4 @@
-package edu.asu.classsearch.test;
+package edu.asu.classsearch.testrunner;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;

@@ -1,4 +1,4 @@
-package edu.asu.classsearch;
+package edu.asu.classsearch.pages;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
