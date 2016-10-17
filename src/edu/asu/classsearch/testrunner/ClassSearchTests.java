@@ -17,7 +17,7 @@ import edu.asu.classsearch.testcases.def.classsearch_Homepage_Automation;
 
 import java.util.regex.*;
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src",glue="edu.asu.classsearch",format = {"html:target"})
+@CucumberOptions(features="src/edu/asu/classearch/features",glue="edu.asu.classsearch.testcases.def",format = {"html:target"})
 public class ClassSearchTests {
 	
   }

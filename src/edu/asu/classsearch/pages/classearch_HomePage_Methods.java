@@ -60,8 +60,9 @@ public class classearch_HomePage_Methods {
 	public static void keywordanddsubject(String Searchterm,String keyword){
 		WebElement elem=property_keyword();
 		WebElement elem_subject=property_subject();
-		elem.sendKeys(keyword);
 		elem_subject.sendKeys(Searchterm);
+		elem.sendKeys(keyword);
+		
 	}
 	//---------------------------------------------------------------------------------
 	public static void performsearch(){

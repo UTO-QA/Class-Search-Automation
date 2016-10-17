@@ -10,6 +10,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
+import edu.classsearch.input.get_Input;
 import junit.framework.Assert;
 
 public class classsearch_Homepage_Automation {
@@ -30,7 +31,8 @@ public class classsearch_Homepage_Automation {
 	//TEST1: CHECK if course accepts Positive Subject 
 	@When("^User enters Correct Subject$")
 	public void Postive1_subject(){
-		String searchterm="CSE";
+		String []values=get_Input.inputload("TC_1").split(",");
+		String searchterm=values[0];
 		map.subject(searchterm);
 		map.performsearch();
 	  this.results=map.assertresults();
@@ -46,7 +48,8 @@ public class classsearch_Homepage_Automation {
 	//TEST2: CHECK if course rejects Negative Subject
 	@When("^User enters Incorrect Subject$")
 	public void incorrect_subject1(){
-		String searchterm="AAA";
+		String []values=get_Input.inputload("TC_2").split(",");
+		String searchterm=values[0];
 		map.subject(searchterm);
 		map.performsearch();
 		this.results=map.assertresults();
@@ -62,8 +65,9 @@ public class classsearch_Homepage_Automation {
 	//TEST3: CHECK if course accepts Positive Subject  and Number
 		@When("^User enters correct Subject and Number$")
 		public void subject_number(){
-			String searchterm="CSE";
-			String number="120";
+			String []values=get_Input.inputload("TC_3").split(",");
+			String searchterm=values[0];
+			String number=values[1];
 			map.subjectandnumber(searchterm,number);
 			map.performsearch();
 		    results=map.assertresults();
@@ -79,8 +83,9 @@ public class classsearch_Homepage_Automation {
    //TEST4: CHECK if course rejects Incorrect Subject  and Incorrect Number
 		@When("^User enters incorrect Subject and incorrect Number$")
 		public void subject1_number(){
-			String searchterm="CSE";
-			String number="101";
+			String []values=get_Input.inputload("TC_4").split(",");
+			String searchterm=values[0];
+			String number=values[1];
 			map.subjectandnumber(searchterm,number);
 			map.performsearch();
 			this.results=map.assertresults();
@@ -97,8 +102,9 @@ public class classsearch_Homepage_Automation {
 		
 		@When("^User enters swapped values for Subject and Number$")
 		public void subject_2_number(){
-					String searchterm="120";
-					String number="CSE";
+			String []values=get_Input.inputload("TC_5").split(",");
+			String searchterm=values[0];
+			String number=values[1];
 					map.subjectandnumber(searchterm,number);
 					map.performsearch();
 					this.results=map.assertresults();
@@ -114,7 +120,9 @@ public class classsearch_Homepage_Automation {
 		//TEST 6:CHECK if search by only Number works
 				@When("^User enters correct Number$")
 				public void test_number(){
-					String number="120";
+					String []values=get_Input.inputload("TC_6").split(",");
+					String number=values[0];
+					
 					map.Number(number);
 					map.performsearch();
 					this.results=map.assertresults();
@@ -130,7 +138,8 @@ public class classsearch_Homepage_Automation {
 	//TEST7: CHECK if search by incorrect number displays a warning message
 				@When("^User enters incorrect Number$")	
 		public void check_incorrect_number(){
-							String number="1201.1";
+					String []values=get_Input.inputload("TC_7").split(",");
+					String number=values[0];
 							map.Number(number);
 							map.performsearch();
 							this.results=map.assertresults();
@@ -146,7 +155,8 @@ public class classsearch_Homepage_Automation {
 	//TEST8: Verify that search with only keyword produces results
 		@When("^User performs a search using only the correct keyword$")
 		public void keyword(){
-					String keyword="Data";
+					String []values=get_Input.inputload("TC_8").split(",");
+					String keyword=values[0];
 					map.keyword(keyword);
 					map.performsearch();
 					this.results=map.assertresults();
@@ -162,8 +172,9 @@ public class classsearch_Homepage_Automation {
 		//TEST9: Verify that search with only incorrect keyword produces proper warning message
 				@When("^User performs a search using only the incorrect keyword or keyword with less than 3 letters$")
 				public void incorrect_keyword(){
-							String keyword="Hydra";
-							String keyword_lim="Xu";
+					String []values=get_Input.inputload("TC_9").split(",");
+					String keyword=values[0];
+					String keyword_lim=values[1];
 							map.keyword(keyword);
 							map.performsearch();
 							this.results=map.assertresults();
@@ -183,8 +194,9 @@ public class classsearch_Homepage_Automation {
 		//TEST 10: Verify that search with Correct Subject and  keyword produces Search results
 				@When("^User performs a search using the correct keyword and correct Subject$")
 				public void correct_keyword_Subject(){
-							String keyword="Data";
-							String Subject="CSE";
+					String []values=get_Input.inputload("TC_10").split(",");
+					String Subject=values[0];
+					String keyword=values[1];
 							map.keywordanddsubject(Subject, keyword);
 							map.performsearch();
 							this.results=map.assertresults();
@@ -200,8 +212,9 @@ public class classsearch_Homepage_Automation {
 		//TEST 11: Verify that search with Correct Subject and  keyword produces Search results
 				@When("^User performs a search using the incorrect keyword or Subject$")
 				public void incorrect_keyword_Subject(){
-							String keyword="Anything";
-							String Subject="CSE";
+					String []values=get_Input.inputload("TC_11").split(",");
+					String Subject=values[0];
+					String keyword=values[1];
 							map.keywordanddsubject(Subject, keyword);
 							map.performsearch();
 							this.results=map.assertresults();
