@@ -18,24 +18,23 @@ public class classsearch_Homepage_Automation {
 	private WebDriver driver;
 	private String results;
 	private String results_1;
-	classearch_HomePage_Methods map=new classearch_HomePage_Methods();
 	//creates a connection
 	@Given("^The user is on Class Search page$")
 	public void getconnection(){
-		map.getconn();
+		classearch_HomePage_Methods.getconn();
 	}
 	//delete a connection
 	public void closeconnection(){
-		map.closeconn();
+		classearch_HomePage_Methods.closeconn();
 	}
 	//TEST1: CHECK if course accepts Positive Subject 
 	@When("^User enters Correct Subject$")
 	public void Postive1_subject(){
 		String []values=get_Input.inputload("TC_1").split(",");
 		String searchterm=values[0];
-		map.subject(searchterm);
-		map.performsearch();
-	  this.results=map.assertresults();
+		classearch_HomePage_Methods.subject(searchterm);
+		classearch_HomePage_Methods.performsearch();
+	  this.results=classearch_HomePage_Methods.assertresults();
 
 	}
 	@Then("^The Results with correct subject info should be Displayed$")
@@ -50,9 +49,9 @@ public class classsearch_Homepage_Automation {
 	public void incorrect_subject1(){
 		String []values=get_Input.inputload("TC_2").split(",");
 		String searchterm=values[0];
-		map.subject(searchterm);
-		map.performsearch();
-		this.results=map.assertresults();
+		classearch_HomePage_Methods.subject(searchterm);
+		classearch_HomePage_Methods.performsearch();
+		this.results=classearch_HomePage_Methods.assertresults();
 		//
 	}
 	@Then("^A Warning should be Displayed for incorrect subject$")
@@ -68,9 +67,9 @@ public class classsearch_Homepage_Automation {
 			String []values=get_Input.inputload("TC_3").split(",");
 			String searchterm=values[0];
 			String number=values[1];
-			map.subjectandnumber(searchterm,number);
-			map.performsearch();
-		    results=map.assertresults();
+			classearch_HomePage_Methods.subjectandnumber(searchterm,number);
+			classearch_HomePage_Methods.performsearch();
+		    results=classearch_HomePage_Methods.assertresults();
 			//closeconnection();
 			
 		}
@@ -86,9 +85,9 @@ public class classsearch_Homepage_Automation {
 			String []values=get_Input.inputload("TC_4").split(",");
 			String searchterm=values[0];
 			String number=values[1];
-			map.subjectandnumber(searchterm,number);
-			map.performsearch();
-			this.results=map.assertresults();
+			classearch_HomePage_Methods.subjectandnumber(searchterm,number);
+			classearch_HomePage_Methods.performsearch();
+			this.results=classearch_HomePage_Methods.assertresults();
 			//closeconnection();
 			
 		}
@@ -105,9 +104,9 @@ public class classsearch_Homepage_Automation {
 			String []values=get_Input.inputload("TC_5").split(",");
 			String searchterm=values[0];
 			String number=values[1];
-					map.subjectandnumber(searchterm,number);
-					map.performsearch();
-					this.results=map.assertresults();
+					classearch_HomePage_Methods.subjectandnumber(searchterm,number);
+					classearch_HomePage_Methods.performsearch();
+					this.results=classearch_HomePage_Methods.assertresults();
 					//closeconnection();
 					
 			}
@@ -123,9 +122,9 @@ public class classsearch_Homepage_Automation {
 					String []values=get_Input.inputload("TC_6").split(",");
 					String number=values[0];
 					
-					map.Number(number);
-					map.performsearch();
-					this.results=map.assertresults();
+					classearch_HomePage_Methods.Number(number);
+					classearch_HomePage_Methods.performsearch();
+					this.results=classearch_HomePage_Methods.assertresults();
 					//loseconnection();
 			}
 				@Then("^A Warning should be Displayed for correct Number Scenario$")
@@ -140,9 +139,9 @@ public class classsearch_Homepage_Automation {
 		public void check_incorrect_number(){
 					String []values=get_Input.inputload("TC_7").split(",");
 					String number=values[0];
-							map.Number(number);
-							map.performsearch();
-							this.results=map.assertresults();
+							classearch_HomePage_Methods.Number(number);
+							classearch_HomePage_Methods.performsearch();
+							this.results=classearch_HomePage_Methods.assertresults();
 							
 					}
 		@Then("^A Warning should be Displayed for incorrect number scenario$")
@@ -157,9 +156,9 @@ public class classsearch_Homepage_Automation {
 		public void keyword(){
 					String []values=get_Input.inputload("TC_8").split(",");
 					String keyword=values[0];
-					map.keyword(keyword);
-					map.performsearch();
-					this.results=map.assertresults();
+					classearch_HomePage_Methods.keyword(keyword);
+					classearch_HomePage_Methods.performsearch();
+					this.results=classearch_HomePage_Methods.assertresults();
 					//closeconnection();
 					
 			}
@@ -169,18 +168,18 @@ public class classsearch_Homepage_Automation {
 			assertThat(results,CoreMatchers.containsString("Showing"));
 			closeconnection();
 	}
-		//TEST9: Verify that search with only incorrect keyword produces proper warning message
+	//TEST9: Verify that search with only incorrect keyword produces proper warning message
 				@When("^User performs a search using only the incorrect keyword or keyword with less than 3 letters$")
 				public void incorrect_keyword(){
 					String []values=get_Input.inputload("TC_9").split(",");
 					String keyword=values[0];
 					String keyword_lim=values[1];
-							map.keyword(keyword);
-							map.performsearch();
-							this.results=map.assertresults();
-							map.keyword(keyword_lim);
-							map.performsearch();
-							this.results_1=map.assertresults();
+							classearch_HomePage_Methods.keyword(keyword);
+							classearch_HomePage_Methods.performsearch();
+							this.results=classearch_HomePage_Methods.assertresults();
+							classearch_HomePage_Methods.keyword(keyword_lim);
+							classearch_HomePage_Methods.performsearch();
+							this.results_1=classearch_HomePage_Methods.assertresults();
 							//closeconnection();
 					}
 				@Then("^An Appropriate warning message is displayed for incorrect keyword$")
@@ -191,15 +190,15 @@ public class classsearch_Homepage_Automation {
 					Assert.assertEquals(results_1, "Keywords must be longer.");
 					closeconnection();
 			}	
-		//TEST 10: Verify that search with Correct Subject and  keyword produces Search results
+	//TEST 10: Verify that search with Correct Subject and  keyword produces Search results
 				@When("^User performs a search using the correct keyword and correct Subject$")
 				public void correct_keyword_Subject(){
 					String []values=get_Input.inputload("TC_10").split(",");
 					String Subject=values[0];
 					String keyword=values[1];
-							map.keywordanddsubject(Subject, keyword);
-							map.performsearch();
-							this.results=map.assertresults();
+							classearch_HomePage_Methods.keywordanddsubject(Subject, keyword);
+							classearch_HomePage_Methods.performsearch();
+							this.results=classearch_HomePage_Methods.assertresults();
 							
 					}
 				@Then("^The Search Results page is Displayed for correct keyword and subject scenario$")
@@ -209,15 +208,15 @@ public class classsearch_Homepage_Automation {
 					assertThat(results,CoreMatchers.containsString("Showing"));
 			}
 				
-		//TEST 11: Verify that search with Correct Subject and  keyword produces Search results
+	//TEST 11: Verify that search with Correct Subject and  keyword produces Search results
 				@When("^User performs a search using the incorrect keyword or Subject$")
 				public void incorrect_keyword_Subject(){
 					String []values=get_Input.inputload("TC_11").split(",");
 					String Subject=values[0];
 					String keyword=values[1];
-							map.keywordanddsubject(Subject, keyword);
-							map.performsearch();
-							this.results=map.assertresults();
+							classearch_HomePage_Methods.keywordanddsubject(Subject, keyword);
+							classearch_HomePage_Methods.performsearch();
+							this.results=classearch_HomePage_Methods.assertresults();
 							
 					}
 				@Then("^The Warning is Displayed for incorrect keyword or subject scenario$")
@@ -227,5 +226,34 @@ public class classsearch_Homepage_Automation {
 					Assert.assertEquals(results, "Please update your search criteria and try again.");
 			}	
 				
-
+	//TEST 12: Verify that toggle the radio button changes the results
+				@When("^User selects for open classes and performs a search$")
+				public void toggleradio_open(){
+					classearch_HomePage_Methods.selectaterm("Spring 2016");
+					classearch_HomePage_Methods.subject("ENG");
+					classearch_HomePage_Methods.performsearch();
+					classearch_HomePage_Methods.check_ifopenorall("open");
+					
+				}
+				@Then("^The Results should only contain open values$")
+				public void verifytoggleradio_open(){
+					boolean value=classearch_HomePage_Methods.verify_results("openorall");
+					Assert.assertEquals(true,value);
+					classearch_HomePage_Methods.closeconn();
+				}
+	//TEST 13: Verify that toggle the radio button changes the results
+				@When("^User selects for all classes and performs a search$")
+				public void toggleradio_all(){
+					classearch_HomePage_Methods.selectaterm("Spring 2016");
+					classearch_HomePage_Methods.subject("ENG");
+					classearch_HomePage_Methods.performsearch();
+					classearch_HomePage_Methods.check_ifopenorall("all");
+					
+				}
+				@Then("^The Results should contain open and closed values$")
+				public void verifytoggleradio_all(){
+					boolean value=classearch_HomePage_Methods.verify_results("openorall");
+					Assert.assertEquals(false,value);
+					classearch_HomePage_Methods.closeconn();
+				}
 }

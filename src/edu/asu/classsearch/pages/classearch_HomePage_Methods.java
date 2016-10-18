@@ -1,5 +1,6 @@
 package edu.asu.classsearch.pages;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
@@ -7,18 +8,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.*;
 import cucumber.api.java.en.And;
 public class classearch_HomePage_Methods {
 	private static WebDriver driver;
-	private String url="https://webapp4-qa.asu.edu/catalog";
-	public void getconn(){
+	private static String url="https://webapp4.asu.edu/catalog";
+	public static void getconn(){
 		driver=new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
-	public void closeconn(){
+	public static void closeconn(){
 		driver.close();
 	}
 	private static WebElement property_subject(){
@@ -35,6 +37,25 @@ public class classearch_HomePage_Methods {
 		WebElement elem=driver.findElement(By.id("keywords"));
 		elem.clear();
 		return elem;
+	}
+	private static WebElement property_radio_open(){
+		WebElement elem =driver.findElement(By.id("searchTypeOpen"));
+		return elem;
+	}
+	private static WebElement property_radio_All(){
+		WebElement elem =driver.findElement(By.id("searchTypeAllClass"));				
+		return elem;
+	}
+	private static Select property_Semester_list(){
+		Select select =new Select(driver.findElement(By.xpath("//select[@id='term']")));
+		return select;
+		
+	}
+	private static List<WebElement> property_Filter_By_session(){
+		String[]options={"A","B","C","Dynamic"};
+			List<WebElement> elem=driver.findElements(By.xpath("//input[contains(@id,'session')]"));
+			return elem;
+			
 	}
 	//-----------------------------------------------------------------------------
 	public static void subject(String Searchterm){
@@ -63,6 +84,31 @@ public class classearch_HomePage_Methods {
 		elem_subject.sendKeys(Searchterm);
 		elem.sendKeys(keyword);
 		
+	}
+	public static void selectaterm(String term){
+		Select select=property_Semester_list();
+		select.selectByVisibleText(term);
+	}
+	public static void check_ifopenorall(String radio){
+		if(radio.equals("open"))
+		{
+			WebElement elem=property_radio_open();
+			elem.click();
+		}
+		else
+		{
+			WebElement elem=property_radio_All();
+			elem.click();
+		}
+	}
+	public static boolean verify_results(String verfiy){
+		{
+			List<WebElement> open=driver.findElements(By.xpath("//img[contains(@src,'circle')]"));
+			List<WebElement> closed=driver.findElements(By.xpath("//img[contains(@src,'red')]"));
+			if(closed.isEmpty()&& !open.isEmpty())
+				return true;
+			else
+				return false;}
 	}
 	//---------------------------------------------------------------------------------
 	public static void performsearch(){
