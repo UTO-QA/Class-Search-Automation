@@ -9,3 +9,13 @@ Feature: Class Search verify Radio buttons open-all,inperson-online and session 
 		Given The user is on Class Search page 
 		When User selects for all classes and performs a search
 		Then The Results should contain open and closed values
+		
+	Scenario: TC_14 Verify that the results displayed contain only campus classes when in-Person is selected
+		Given The user is on Class Search page 
+		When User selects for in-person and performs a search
+		Then The Results should contain only On-Campus Classes
+		
+	Scenario: TC_15 Verify that the results displayed contain only ASUONLINE classes when online is selected
+		Given The user is on Class Search page 
+		When User selects for online and performs a search
+		Then The Results should contain only online Classes

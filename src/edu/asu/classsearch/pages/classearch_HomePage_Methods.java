@@ -46,6 +46,14 @@ public class classearch_HomePage_Methods {
 		WebElement elem =driver.findElement(By.id("searchTypeAllClass"));				
 		return elem;
 	}
+	private static WebElement property_radio_inperson(){
+		WebElement elem =driver.findElement(By.id("typeSelectionCampus"));
+		return elem;
+	}
+	private static WebElement property_radio_online(){
+		WebElement elem =driver.findElement(By.id("typeSelectionOnline"));				
+		return elem;
+	}
 	private static Select property_Semester_list(){
 		Select select =new Select(driver.findElement(By.xpath("//select[@id='term']")));
 		return select;
@@ -95,21 +103,45 @@ public class classearch_HomePage_Methods {
 			WebElement elem=property_radio_open();
 			elem.click();
 		}
-		else
+		if(radio.equals("all"))
 		{
 			WebElement elem=property_radio_All();
 			elem.click();
 		}
 	}
-	public static boolean verify_results(String verfiy){
+	public static void check_campusoronline(String radio){
+		if(radio.equals("campus"))
 		{
+			WebElement elem=property_radio_inperson();
+			elem.click();
+		}
+		if(radio.equals("online"))
+		{
+			WebElement elem=property_radio_online();
+			elem.click();
+		}
+	}
+	//td[@class="locationBuildingColumnValue"]
+	public static String verify_results(String verfiy)
+		{	
+		if(verfiy.equals("checkopenorall"))
+			{
 			List<WebElement> open=driver.findElements(By.xpath("//img[contains(@src,'circle')]"));
 			List<WebElement> closed=driver.findElements(By.xpath("//img[contains(@src,'red')]"));
 			if(closed.isEmpty()&& !open.isEmpty())
-				return true;
+				return "true";
 			else
-				return false;}
-	}
+				return "false";}
+		if(verfiy.equals("location")){
+			List<WebElement> location=driver.findElements(By.xpath("//td[@class='locationBuildingColumnValue' and not(contains(. ,'Online'))]"));
+			if(!location.isEmpty())
+				return "true";
+			else
+				return "false";
+		}
+		else
+			return "none"; 
+		}
 	//---------------------------------------------------------------------------------
 	public static void performsearch(){
 		WebElement elem=driver.findElement(By.xpath("//a[@id='Go']"));

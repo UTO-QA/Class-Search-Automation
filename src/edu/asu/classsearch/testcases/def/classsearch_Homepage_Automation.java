@@ -229,31 +229,82 @@ public class classsearch_Homepage_Automation {
 	//TEST 12: Verify that toggle the radio button changes the results
 				@When("^User selects for open classes and performs a search$")
 				public void toggleradio_open(){
-					classearch_HomePage_Methods.selectaterm("Spring 2016");
-					classearch_HomePage_Methods.subject("ENG");
+					String []values=get_Input.inputload("TC_12").split(",");
+					String term=values[0];
+					String subject=values[1];
+					String open=values[2];
+					classearch_HomePage_Methods.selectaterm(term);
+					classearch_HomePage_Methods.check_ifopenorall(open);
+					classearch_HomePage_Methods.subject(subject);
 					classearch_HomePage_Methods.performsearch();
-					classearch_HomePage_Methods.check_ifopenorall("open");
+					
 					
 				}
 				@Then("^The Results should only contain open values$")
 				public void verifytoggleradio_open(){
-					boolean value=classearch_HomePage_Methods.verify_results("openorall");
-					Assert.assertEquals(true,value);
+					String value=classearch_HomePage_Methods.verify_results("checkopenorall");
+					Assert.assertEquals("true",value);
 					classearch_HomePage_Methods.closeconn();
 				}
 	//TEST 13: Verify that toggle the radio button changes the results
 				@When("^User selects for all classes and performs a search$")
 				public void toggleradio_all(){
-					classearch_HomePage_Methods.selectaterm("Spring 2016");
-					classearch_HomePage_Methods.subject("ENG");
+					String []values=get_Input.inputload("TC_13").split(",");
+					String term=values[0];
+					String subject=values[1];
+					String all=values[2];
+					classearch_HomePage_Methods.check_ifopenorall(all);
+					classearch_HomePage_Methods.selectaterm(term);
+					classearch_HomePage_Methods.subject(subject);
 					classearch_HomePage_Methods.performsearch();
-					classearch_HomePage_Methods.check_ifopenorall("all");
+					
 					
 				}
 				@Then("^The Results should contain open and closed values$")
 				public void verifytoggleradio_all(){
-					boolean value=classearch_HomePage_Methods.verify_results("openorall");
-					Assert.assertEquals(false,value);
+					String value=classearch_HomePage_Methods.verify_results("checkopenorall");
+					Assert.assertEquals("false",value);
 					classearch_HomePage_Methods.closeconn();
 				}
+	//TEST 14: Verify that the results displayed contain only campus classes when in-Person is selected
+				@When("^User selects for in-person and performs a search$")
+				public void toggleradio_campus(){
+					String []values=get_Input.inputload("TC_14").split(",");
+					String campus=values[0];
+					String sem=values[1];
+					String subject=values[2];
+					classearch_HomePage_Methods.check_campusoronline(campus);
+					classearch_HomePage_Methods.selectaterm(sem);
+					classearch_HomePage_Methods.subject(subject);
+					classearch_HomePage_Methods.performsearch();
+					
+					
+				}
+				@Then("^The Results should contain only On-Campus Classes$")
+				public void verifytoggleradio_campus(){
+					String value=classearch_HomePage_Methods.verify_results("location");
+					Assert.assertEquals("true",value);
+					classearch_HomePage_Methods.closeconn();
+				}
+	//TEST 15: Verify that the results displayed contain only ASUONLINE classes when online is selected
+				@When("^User selects for online and performs a search$")
+				public void toggleradio_online(){
+					String []values=get_Input.inputload("TC_15").split(",");
+					String campus=values[0];
+					String sem=values[1];
+					String subject=values[2];
+					classearch_HomePage_Methods.check_campusoronline(campus);
+					classearch_HomePage_Methods.selectaterm(sem);
+					classearch_HomePage_Methods.subject(subject);
+					classearch_HomePage_Methods.performsearch();
+					
+					
+				}
+				@Then("^The Results should contain only online Classes$")
+				public void verifytoggleradio_online(){
+					String value=classearch_HomePage_Methods.verify_results("location");
+					Assert.assertEquals("false",value);
+					classearch_HomePage_Methods.closeconn();
+				}
+
 }
