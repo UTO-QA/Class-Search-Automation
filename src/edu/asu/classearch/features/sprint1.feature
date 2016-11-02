@@ -55,3 +55,23 @@ Feature: Class Search verify Subject,Number and keyword
 		Given The user is on Class Search page 
 		When  User performs a search using the incorrect keyword or Subject
 		Then  The Warning is Displayed for incorrect keyword or subject scenario
+		Scenario: TC_12 Verify that the results displayed for open classes only when open is selected
+		Given The user is on Class Search page 
+		When User selects for open classes and performs a search
+		Then The Results should only contain open values
+		
+	Scenario: TC_13 Verify that the results displayed for open and closed classes only when all is selected
+		Given The user is on Class Search page 
+		When User selects for all classes and performs a search
+		Then The Results should contain open and closed values
+		
+	Scenario: TC_14 Verify that the results displayed contain only campus classes when in-Person is selected
+		Given The user is on Class Search page 
+		When User selects for in-person and performs a search
+		Then The Results should contain only On-Campus Classes
+		
+	Scenario: TC_15 Verify that the results displayed contain only ASUONLINE classes when online is selected
+		Given The user is on Class Search page 
+		When User selects for online and performs a search
+		Then The Results should contain only online Classes
+		

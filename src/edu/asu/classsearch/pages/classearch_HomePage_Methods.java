@@ -60,11 +60,11 @@ public class classearch_HomePage_Methods {
 		
 	}
 	private static List<WebElement> property_Filter_By_session(){
-		String[]options={"A","B","C","Dynamic"};
-			List<WebElement> elem=driver.findElements(By.xpath("//input[contains(@id,'session')]"));
+			List<WebElement> elem=driver.findElements(By.xpath("//table[@id='sessionFilter']//input"));
 			return elem;
 			
 	}
+	//table[@id="sessionFilter"]//input
 	//-----------------------------------------------------------------------------
 	public static void subject(String Searchterm){
 		WebElement elem= property_subject();
@@ -120,6 +120,23 @@ public class classearch_HomePage_Methods {
 			WebElement elem=property_radio_online();
 			elem.click();
 		}
+	} 
+	public static void select_session(String session){
+		List<WebElement> elem=property_Filter_By_session();
+		
+		if(session.equals("A")){
+			elem.get(0).click();
+		}
+		else if(session.equals("B")){
+			elem.get(1).click();
+		}
+		else if(session.equals("C")){
+			elem.get(2).click();
+		}
+		else {
+			elem.get(3).click();
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 	//td[@class="locationBuildingColumnValue"]
 	public static String verify_results(String verfiy)
@@ -132,7 +149,7 @@ public class classearch_HomePage_Methods {
 				return "true";
 			else
 				return "false";}
-		if(verfiy.equals("location")){
+		else if(verfiy.equals("location")){
 			List<WebElement> location=driver.findElements(By.xpath("//td[@class='locationBuildingColumnValue' and not(contains(. ,'Online'))]"));
 			if(!location.isEmpty())
 				return "true";
@@ -142,6 +159,15 @@ public class classearch_HomePage_Methods {
 		else
 			return "none"; 
 		}
+	public static boolean verify_session(String sessionvalue){
+		
+			List<WebElement> session=driver.findElements(By.xpath("//table[@id='CatalogList']/tbody/tr[1]/td[11]//a"));
+			for (WebElement elem:session)
+				{String value=elem.getAttribute("title");
+				if(!value.contains("Session"+" "+sessionvalue))
+					return false;}
+			return true;	 	
+	}
 	//---------------------------------------------------------------------------------
 	public static void performsearch(){
 		WebElement elem=driver.findElement(By.xpath("//a[@id='Go']"));
