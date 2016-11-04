@@ -306,6 +306,8 @@ public class classsearch_Homepage_Automation {
 					Assert.assertEquals("false",value);
 					classearch_HomePage_Methods.closeconn();
 				}
+				
+//TEST 16:
 				@When("^User selects Session A and performs a search$")
 				public void Session_A(){
 					String []values=get_Input.inputload("TC_16").split(",");
@@ -313,29 +315,33 @@ public class classsearch_Homepage_Automation {
 					String sem=values[1];
 					String subject=values[2];
 					String session=values[3];
+					String openorall=values[4];
 					classearch_HomePage_Methods.check_campusoronline(campus);
 					classearch_HomePage_Methods.selectaterm(sem);
 					classearch_HomePage_Methods.subject(subject);
+					classearch_HomePage_Methods.check_ifopenorall(openorall);
 					classearch_HomePage_Methods.performsearch();
 					classearch_HomePage_Methods.select_session(session);
-					
+					this.results=session;
 				}
 				@Then("^The Results should contain only Session A classes$")
 				public void verifySession_A(){
-					boolean session_verify=classearch_HomePage_Methods.verify_session("A");
+					boolean session_verify=classearch_HomePage_Methods.verify_session(results);
 					Assert.assertEquals(session_verify, true);
 					classearch_HomePage_Methods.closeconn();
 				}
 				@When("^User selects Session B and performs a search$")
 				public void Session_B(){
-					String []values=get_Input.inputload("TC_17").split(",");
+					String []values=get_Input.inputload("TC_16").split(",");
 					String campus=values[0];
 					String sem=values[1];
 					String subject=values[2];
 					String session=values[3];
+					String openorall=values[4];
 					classearch_HomePage_Methods.check_campusoronline(campus);
 					classearch_HomePage_Methods.selectaterm(sem);
 					classearch_HomePage_Methods.subject(subject);
+					classearch_HomePage_Methods.check_ifopenorall(openorall);
 					classearch_HomePage_Methods.performsearch();
 					classearch_HomePage_Methods.select_session(session);
 					this.results=session;
@@ -349,16 +355,19 @@ public class classsearch_Homepage_Automation {
 				}
 				@When("^User selects Session C and performs a search$")
 				public void Session_C(){
-					String []values=get_Input.inputload("TC_18").split(",");
+					String []values=get_Input.inputload("TC_16").split(",");
 					String campus=values[0];
 					String sem=values[1];
 					String subject=values[2];
 					String session=values[3];
+					String openorall=values[4];
 					classearch_HomePage_Methods.check_campusoronline(campus);
 					classearch_HomePage_Methods.selectaterm(sem);
 					classearch_HomePage_Methods.subject(subject);
+					classearch_HomePage_Methods.check_ifopenorall(openorall);
 					classearch_HomePage_Methods.performsearch();
 					classearch_HomePage_Methods.select_session(session);
+					this.results=session;
 					
 				}
 				@Then("^The Results should contain only Session C classes$")

@@ -14,58 +14,91 @@ import cucumber.api.java.*;
 import cucumber.api.java.en.And;
 public class classearch_HomePage_Methods {
 	private static WebDriver driver;
+	//url for testing
 	private static String url="https://webapp4.asu.edu/catalog";
+	//make a connection using Firefox Driver
 	public static void getconn(){
 		driver=new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
+	//close a connection
 	public static void closeconn(){
 		driver.close();
 	}
+	//Property for handling search button
+	private static WebElement property_search_button(){
+		WebElement elem=driver.findElement(By.xpath("//button[@id='submitForm']"));
+		return elem;
+		
+	}
+	//Property for getting classes with no open seats i.e. red crosses
+	private static List<WebElement> property_redx_search_results(){
+		List<WebElement> elem=driver.findElements(By.xpath("//img[contains(@src,'red')]"));
+		return elem;
+	}
+	//Property for getting classes with open seats i.e. Green crosses
+	private static List<WebElement> property_greencircle_search_results(){
+		List<WebElement> elem=driver.findElements(By.xpath("//img[contains(@src,'circle')]"));
+		return elem;
+	}
+	//Property for accessing Subject field
 	private static WebElement property_subject(){
 		WebElement elem=driver.findElement(By.id("subjectEntry"));
 		elem.clear();
 		return elem;
 	}
+	//Property for accessing Number field
 	private static WebElement property_Number(){
 		WebElement elem=driver.findElement(By.id("catalogNbr"));
 		elem.clear();	
 		return elem;
 	}
+	//Property for accessing keyword field
 	private static WebElement property_keyword(){
 		WebElement elem=driver.findElement(By.id("keywords"));
 		elem.clear();
 		return elem;
 	}
+	//Property for accessing open radio button
 	private static WebElement property_radio_open(){
 		WebElement elem =driver.findElement(By.id("searchTypeOpen"));
 		return elem;
 	}
+	//Property for accessing all radio button
 	private static WebElement property_radio_All(){
 		WebElement elem =driver.findElement(By.id("searchTypeAllClass"));				
 		return elem;
 	}
+	////Property for accessing in person radio button
 	private static WebElement property_radio_inperson(){
 		WebElement elem =driver.findElement(By.id("typeSelectionCampus"));
 		return elem;
 	}
+	//Property for accessing online radio button
 	private static WebElement property_radio_online(){
 		WebElement elem =driver.findElement(By.id("typeSelectionOnline"));				
 		return elem;
 	}
+	//Property for accessing Term DropDowm list 
 	private static Select property_Semester_list(){
 		Select select =new Select(driver.findElement(By.xpath("//select[@id='term']")));
 		return select;
 		
 	}
+	//Property for accessing all the sessions in the page
 	private static List<WebElement> property_Filter_By_session(){
 			List<WebElement> elem=driver.findElements(By.xpath("//table[@id='sessionFilter']//input"));
 			return elem;
 			
 	}
+	//Property for accessing the dates of list of classes 
+	private static List<WebElement> property_Get_Session_name_list(){
+		List<WebElement> session=driver.findElements(By.xpath("//table[@id='CatalogList']/tbody/tr[1]/td[11]//a"));
+		return session;
+	}
 	//table[@id="sessionFilter"]//input
-	//-----------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------
 	public static void subject(String Searchterm){
 		WebElement elem= property_subject();
 		elem.sendKeys(Searchterm);
@@ -143,8 +176,8 @@ public class classearch_HomePage_Methods {
 		{	
 		if(verfiy.equals("checkopenorall"))
 			{
-			List<WebElement> open=driver.findElements(By.xpath("//img[contains(@src,'circle')]"));
-			List<WebElement> closed=driver.findElements(By.xpath("//img[contains(@src,'red')]"));
+			List<WebElement> open=property_greencircle_search_results();
+			List<WebElement> closed=property_redx_search_results();
 			if(closed.isEmpty()&& !open.isEmpty())
 				return "true";
 			else
@@ -161,7 +194,7 @@ public class classearch_HomePage_Methods {
 		}
 	public static boolean verify_session(String sessionvalue){
 		
-			List<WebElement> session=driver.findElements(By.xpath("//table[@id='CatalogList']/tbody/tr[1]/td[11]//a"));
+			List<WebElement> session=property_Get_Session_name_list();
 			for (WebElement elem:session)
 				{String value=elem.getAttribute("title");
 				if(!value.contains("Session"+" "+sessionvalue))
@@ -170,7 +203,7 @@ public class classearch_HomePage_Methods {
 	}
 	//---------------------------------------------------------------------------------
 	public static void performsearch(){
-		WebElement elem=driver.findElement(By.xpath("//a[@id='Go']"));
+		WebElement elem=property_search_button();
 		WebDriverWait wait = new WebDriverWait(driver,30); //this is explicit wait
 		wait.until(ExpectedConditions.elementToBeClickable(elem));
 		elem.click();
