@@ -18,6 +18,7 @@ public class get_Input {
 		// load a properties file
 		prop.load(input);
 		value=prop.getProperty(key);
+		value.trim();
 
 	} catch (IOException ex) {
 		ex.printStackTrace();
@@ -31,5 +32,8 @@ public class get_Input {
 		}
 }
 	return value;
+	}
+	public static void main(String[]args){
+		inputload("TC_4");
 	}
 }

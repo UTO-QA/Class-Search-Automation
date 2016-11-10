@@ -97,6 +97,17 @@ public class classearch_HomePage_Methods {
 		List<WebElement> session=driver.findElements(By.xpath("//table[@id='CatalogList']/tbody/tr[1]/td[11]//a"));
 		return session;
 	}
+	//property select a class or select a first one among multiple ones
+	private static WebElement property_getclass(){
+		WebElement elem=driver.findElement(By.id("informal"));
+		return elem;
+		
+	}
+	//property for adding a class
+	private static WebElement property_addclass(WebElement elem){
+		WebElement addelem=elem.findElement(By.id("Any_6"));
+		return addelem;
+	}
 	//table[@id="sessionFilter"]//input
 	//-------------------------------------------------------------------------------------------
 	public static void subject(String Searchterm){
@@ -207,6 +218,10 @@ public class classearch_HomePage_Methods {
 		WebDriverWait wait = new WebDriverWait(driver,30); //this is explicit wait
 		wait.until(ExpectedConditions.elementToBeClickable(elem));
 		elem.click();
+	}
+	public static void addcourse(){
+		WebElement elem=property_getclass();
+		property_addclass(elem).click();
 	}
 	public static String assertresults(){
 		String Text;
