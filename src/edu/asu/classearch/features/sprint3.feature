@@ -3,3 +3,9 @@ Scenario: TC_19 Verify that the results displayed contain only Session C classes
 		Given User is on ClassSearch Homepage
 		When A user adds a class from class catalog
 		Then The class should be added succesfully to their schedule
+		
+Scenario: TC_20 Verify that the results displayed contain only Session C classes when session C is selected 
+		Given User is on ClassSearch Homepage
+		When A user swaps a class from class catalog
+		Then The class should be swapped succesfully to their schedule
+		

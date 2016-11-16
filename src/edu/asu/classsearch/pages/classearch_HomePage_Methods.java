@@ -104,8 +104,31 @@ public class classearch_HomePage_Methods {
 		WebElement addelem=elem.findElement(By.id("Any_6"));
 		return addelem;
 	}
+	private WebElement property_Registration(){
+		WebElement elem=driver.findElement(By.xpath("//a[contains(., 'Registration')]"));
+		return elem;
+	}
+	private WebElement property_signIn(){
+		WebElement elem=driver.findElement(By.xpath("//a[contains(.,'Sign In')]"));
+		return elem;
+	}
 	//table[@id="sessionFilter"]//input
 	//-------------------------------------------------------------------------------------------
+	public WebElement Pregistrationaction(String action){
+		if(action.equals("swap")){
+			WebElement elem=property_Registration();
+			elem.click();
+			WebElement elem1=elem.findElement(By.xpath("//a[@id='Any_2']"));
+			return elem1;
+		}
+		
+		return null;
+			
+	}
+	public void signIn(){
+		WebElement elem=property_signIn();
+		elem.click();
+	}
 	public  void subject(String Searchterm){
 		WebElement elem= property_subject();
 		elem.sendKeys(Searchterm);

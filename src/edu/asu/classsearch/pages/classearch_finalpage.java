@@ -29,6 +29,7 @@ public class classearch_finalpage {
 		WebElement elem=driver.findElement(By.xpath("//div[@id='win0divDERIVED_REGFRM1_SS_MESSAGE_LONG$0']"));
 	return elem;
 	}
+	
 	private WebElement finishenrolling(){
 		WebElement elem =driver.findElement(By.xpath("//a[@id='DERIVED_REGFRM1_SSR_PB_SUBMIT']"));
 		return elem;
