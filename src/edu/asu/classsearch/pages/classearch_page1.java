@@ -46,6 +46,10 @@ public class classearch_page1 {
 		WebElement elem=driver.findElement(By.xpath("//a[@id='DERIVED_REGFRM1_SSR_PB_ADDTOLIST2$106$']"));
 		return elem;
 	}
+	private WebElement Selectfrom_list(){
+		WebElement elem=driver.findElement(By.xpath("//input[@name='DERIVED_REGFRM1_SSR_SELECT$chk$0']"));
+		return elem;
+	}
 	public  void select_an_instructor(){
 		Select elem=instructor();
 		elem.selectByIndex(1);
@@ -66,4 +70,5 @@ public class classearch_page1 {
 		WebElement elem=Enter();
 		elem.click();
 	}
+	
 }

@@ -121,7 +121,12 @@ public class classearch_HomePage_Methods {
 			WebElement elem1=elem.findElement(By.xpath("//a[@id='Any_2']"));
 			return elem1;
 		}
-		
+		else if(action.equals("remove")){
+			WebElement elem=property_Registration();
+			elem.click();
+			WebElement elem1=elem.findElement(By.xpath("//a[@id='Any_1']"));
+			return elem1;
+		}
 		return null;
 			
 	}

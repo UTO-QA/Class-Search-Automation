@@ -45,6 +45,30 @@ public class classearch_crosspage_functionalities {
 		peoplesoft_3.select_frame();
 		peoplesoft_3.navigate_finishenrolling();
 	}
+	public  void addcourse(String Testcase){
+		String []values=get_Input.inputload("TC_21").split(",");
+		String openorall=values[0];
+		String course=values[1];
+		String number=values[2];
+		cl=new classearch_HomePage_Methods(driver);
+		cl.check_ifopenorall(openorall);
+		cl.subjectandnumber(course,number);
+		cl.performsearch();
+		cl.addcourse();
+		page=new Loginpage(driver);
+		page.get_login();
+		peoplesoft_1=new classearch_page1(driver);
+		peoplesoft_1.select_frame();
+		//peoplesoft_1.select_an_instructor();
+		peoplesoft_1.navigate_next();
+		peoplesoft_2=new classearch_page2(driver);
+		peoplesoft_2.select_frame();
+		peoplesoft_2.navigate_proceed_step_2of3();
+		peoplesoft_3=new classearch_finalpage(driver);
+		peoplesoft_3.select_frame();
+		peoplesoft_3.navigate_finishenrolling();
+		
+	}
 	@Then("^The class should be added succesfully to their schedule$")
 	public void verify_addedclass(){
 		String actual=peoplesoft_3.verify_added();
@@ -79,6 +103,17 @@ public class classearch_crosspage_functionalities {
 		String actual=peoplesoft_3.verify_added();
 		Assert.assertEquals("Success: This class has been replaced.".trim(),actual.trim());
 		classearch_commons.closeconn();
+	}
+  //TC_21
+	public void drop(){
+		addcourse("Tc_21");
+		cl=new classearch_HomePage_Methods(driver);
+		cl.signIn();
+		page=new Loginpage(driver);
+		page.get_login();
+		cl.Pregistrationaction("remove").click();
+		peoplesoft_1=new classearch_page1(driver);
+		peoplesoft_1.select_frame();
 	}
 	
 }
