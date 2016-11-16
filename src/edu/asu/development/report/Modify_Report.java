@@ -44,7 +44,7 @@ public class Modify_Report {
 
 			}
 	
-	public static void main(String[]args){
+	public  void main(String[]args){
 		Modify_Report report=new Modify_Report();
 		report.create_new_file();
 		try {

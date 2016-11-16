@@ -13,108 +13,104 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.*;
 import cucumber.api.java.en.And;
 public class classearch_HomePage_Methods {
-	private static WebDriver driver;
+	private  WebDriver driver;
+	public classearch_HomePage_Methods(WebDriver driver) {
+		// TODO Auto-generated constructor stub
+		this.driver=driver;
+	}
 	//url for testing
-	private static String url="https://webapp4.asu.edu/catalog";
+	private  String url="https://webapp4-qa.asu.edu/catalog";
 	//make a connection using Firefox Driver
-	public static void getconn(){
-		driver=new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(url);
-	}
-	//close a connection
-	public static void closeconn(){
-		driver.close();
-	}
+	
 	//Property for handling search button
-	private static WebElement property_search_button(){
+	private  WebElement property_search_button(){
 		WebElement elem=driver.findElement(By.xpath("//button[@id='submitForm']"));
 		return elem;
 		
 	}
 	//Property for getting classes with no open seats i.e. red crosses
-	private static List<WebElement> property_redx_search_results(){
+	private  List<WebElement> property_redx_search_results(){
 		List<WebElement> elem=driver.findElements(By.xpath("//img[contains(@src,'red')]"));
 		return elem;
 	}
 	//Property for getting classes with open seats i.e. Green crosses
-	private static List<WebElement> property_greencircle_search_results(){
+	private  List<WebElement> property_greencircle_search_results(){
 		List<WebElement> elem=driver.findElements(By.xpath("//img[contains(@src,'circle')]"));
 		return elem;
 	}
 	//Property for accessing Subject field
-	private static WebElement property_subject(){
+	private  WebElement property_subject(){
 		WebElement elem=driver.findElement(By.id("subjectEntry"));
 		elem.clear();
 		return elem;
 	}
 	//Property for accessing Number field
-	private static WebElement property_Number(){
+	private  WebElement property_Number(){
 		WebElement elem=driver.findElement(By.id("catalogNbr"));
 		elem.clear();	
 		return elem;
 	}
 	//Property for accessing keyword field
-	private static WebElement property_keyword(){
+	private  WebElement property_keyword(){
 		WebElement elem=driver.findElement(By.id("keywords"));
 		elem.clear();
 		return elem;
 	}
 	//Property for accessing open radio button
-	private static WebElement property_radio_open(){
+	private  WebElement property_radio_open(){
 		WebElement elem =driver.findElement(By.id("searchTypeOpen"));
 		return elem;
 	}
 	//Property for accessing all radio button
-	private static WebElement property_radio_All(){
+	private  WebElement property_radio_All(){
 		WebElement elem =driver.findElement(By.id("searchTypeAllClass"));				
 		return elem;
 	}
 	////Property for accessing in person radio button
-	private static WebElement property_radio_inperson(){
+	private  WebElement property_radio_inperson(){
 		WebElement elem =driver.findElement(By.id("typeSelectionCampus"));
 		return elem;
 	}
 	//Property for accessing online radio button
-	private static WebElement property_radio_online(){
+	private  WebElement property_radio_online(){
 		WebElement elem =driver.findElement(By.id("typeSelectionOnline"));				
 		return elem;
 	}
 	//Property for accessing Term DropDowm list 
-	private static Select property_Semester_list(){
+	private  Select property_Semester_list(){
 		Select select =new Select(driver.findElement(By.xpath("//select[@id='term']")));
 		return select;
 		
 	}
 	//Property for accessing all the sessions in the page
-	private static List<WebElement> property_Filter_By_session(){
+	private  List<WebElement> property_Filter_By_session(){
 			List<WebElement> elem=driver.findElements(By.xpath("//table[@id='sessionFilter']//input"));
 			return elem;
 			
 	}
 	//Property for accessing the dates of list of classes 
-	private static List<WebElement> property_Get_Session_name_list(){
+	private  List<WebElement> property_Get_Session_name_list(){
 		List<WebElement> session=driver.findElements(By.xpath("//table[@id='CatalogList']/tbody/tr[1]/td[11]//a"));
 		return session;
 	}
 	//property select a class or select a first one among multiple ones
-	private static WebElement property_getclass(){
+	private  WebElement property_getclass(){
 		WebElement elem=driver.findElement(By.id("informal"));
 		return elem;
 		
 	}
 	//property for adding a class
-	private static WebElement property_addclass(WebElement elem){
+	private  WebElement property_addclass(WebElement elem){
 		WebElement addelem=elem.findElement(By.id("Any_6"));
 		return addelem;
 	}
 	//table[@id="sessionFilter"]//input
 	//-------------------------------------------------------------------------------------------
-	public static void subject(String Searchterm){
+	public  void subject(String Searchterm){
 		WebElement elem= property_subject();
 		elem.sendKeys(Searchterm);
 	}
-	public static void subjectandnumber(String Searchterm,String number){
+	public  void subjectandnumber(String Searchterm,String number){
 		WebElement elem=property_subject();
 		WebElement elemnum=property_Number();
 		elem.clear();
@@ -122,26 +118,26 @@ public class classearch_HomePage_Methods {
 		elem.sendKeys(Searchterm);
 		elemnum.sendKeys(number);
 	}
-	public static void Number(String number){
+	public  void Number(String number){
 		WebElement elem= property_Number();
 		elem.sendKeys(number);
 	}
-	public static void keyword(String keyword){
+	public  void keyword(String keyword){
 		WebElement elem= property_keyword();
 		elem.sendKeys(keyword);
 	}
-	public static void keywordanddsubject(String Searchterm,String keyword){
+	public  void keywordanddsubject(String Searchterm,String keyword){
 		WebElement elem=property_keyword();
 		WebElement elem_subject=property_subject();
 		elem_subject.sendKeys(Searchterm);
 		elem.sendKeys(keyword);
 		
 	}
-	public static void selectaterm(String term){
+	public  void selectaterm(String term){
 		Select select=property_Semester_list();
 		select.selectByVisibleText(term);
 	}
-	public static void check_ifopenorall(String radio){
+	public void check_ifopenorall(String radio){
 		if(radio.equals("open"))
 		{
 			WebElement elem=property_radio_open();
@@ -153,7 +149,7 @@ public class classearch_HomePage_Methods {
 			elem.click();
 		}
 	}
-	public static void check_campusoronline(String radio){
+	public  void check_campusoronline(String radio){
 		if(radio.equals("campus"))
 		{
 			WebElement elem=property_radio_inperson();
@@ -165,7 +161,7 @@ public class classearch_HomePage_Methods {
 			elem.click();
 		}
 	} 
-	public static void select_session(String session){
+	public  void select_session(String session){
 		List<WebElement> elem=property_Filter_By_session();
 		
 		if(session.equals("A")){
@@ -183,7 +179,7 @@ public class classearch_HomePage_Methods {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 	//td[@class="locationBuildingColumnValue"]
-	public static String verify_results(String verfiy)
+	public  String verify_results(String verfiy)
 		{	
 		if(verfiy.equals("checkopenorall"))
 			{
@@ -203,7 +199,7 @@ public class classearch_HomePage_Methods {
 		else
 			return "none"; 
 		}
-	public static boolean verify_session(String sessionvalue){
+	public  boolean verify_session(String sessionvalue){
 		
 			List<WebElement> session=property_Get_Session_name_list();
 			for (WebElement elem:session)
@@ -213,17 +209,17 @@ public class classearch_HomePage_Methods {
 			return true;	 	
 	}
 	//---------------------------------------------------------------------------------
-	public static void performsearch(){
+	public  void performsearch(){
 		WebElement elem=property_search_button();
 		WebDriverWait wait = new WebDriverWait(driver,30); //this is explicit wait
 		wait.until(ExpectedConditions.elementToBeClickable(elem));
 		elem.click();
 	}
-	public static void addcourse(){
+	public  void addcourse(){
 		WebElement elem=property_getclass();
 		property_addclass(elem).click();
 	}
-	public static String assertresults(){
+	public  String assertresults(){
 		String Text;
 		try{
 		WebElement elem=driver.findElement(By.id("CatalogList"));

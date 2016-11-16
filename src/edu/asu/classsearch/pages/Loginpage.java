@@ -1,30 +1,36 @@
 package edu.asu.classsearch.pages;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
+import org.junit.internal.runners.statements.ExpectException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.server.handler.ImplicitlyWait;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Loginpage extends classearch_commons{
+public class Loginpage {
 	//property username
-	private static WebDriver driver;
-	public void load_driver(){
-		Loginpage page=new Loginpage();
-		driver=page.getDriver();
+	private  WebDriver driver;
+	public Loginpage(WebDriver driver) {
+		// TODO Auto-generated constructor stub
+		this.driver=driver;
 	}
-	private static WebElement property_username(){
+	private  WebElement property_username(){
 		WebElement elem=driver.findElement(By.id("username"));
 		return elem;
 		
 	}
-	private static WebElement property_password(){
+	private WebElement property_password(){
 		WebElement elem=driver.findElement(By.id("password"));
 		return elem;
 		
 	}
-	private static WebElement property_submit(){
-		WebElement elem=driver.findElement(By.id("login_submit"));
+	private WebElement property_submit(){
+		WebElement elem=driver.findElement(By.className("submit"));
 		return elem;
 		
 	}
@@ -33,10 +39,11 @@ public class Loginpage extends classearch_commons{
 		Scanner sc=new Scanner(System.in);
 		
 		WebElement username=property_username();
-		WebElement password=property_password();
+		final WebElement password=property_password();
+		username.sendKeys("baryasom");
+		password.sendKeys("Arya!1210409308");
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		WebElement submit=property_submit();
-		username.sendKeys(sc.next());
-		password.sendKeys(sc.next());
 		submit.click();
 	}
 }

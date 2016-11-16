@@ -1,7 +1,6 @@
 package edu.asu.classsearch.testcases.def;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,22 +9,25 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
+import edu.asu.classsearch.pages.classearch_commons;
 import edu.classsearch.input.get_Input;
 import junit.framework.Assert;
 
 public class classsearch_Homepage_Automation {
-
+	
+	private classearch_HomePage_Methods classearch_HomePage_Methods;
 	private WebDriver driver;
 	private String results;
 	private String results_1;
 	//creates a connection
 	@Given("^The user is on Class Search page$")
 	public void getconnection(){
-		classearch_HomePage_Methods.getconn();
+		driver=classearch_commons.getconn();
+		classearch_HomePage_Methods=new classearch_HomePage_Methods(driver);
 	}
 	//delete a connection
 	public void closeconnection(){
-		classearch_HomePage_Methods.closeconn();
+		classearch_commons.closeconn();
 	}
 	//TEST1: CHECK if course accepts Positive Subject 
 	@When("^User enters Correct Subject$")
@@ -41,7 +43,7 @@ public class classsearch_Homepage_Automation {
 	public void test_Positive1_subject(){
 		//String results=Postive1_subject();
 		closeconnection();
-		assertThat(results,CoreMatchers.containsString("Showing"));
+		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 		
 	}
 	//TEST2: CHECK if course rejects Negative Subject
@@ -77,7 +79,7 @@ public class classsearch_Homepage_Automation {
 		public void test_subject_number(){
 			//String results=subject_number();
 			closeconnection();
-			assertThat(results,CoreMatchers.containsString("Showing"));
+			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 		}
    //TEST4: CHECK if course rejects Incorrect Subject  and Incorrect Number
 		@When("^User enters incorrect Subject and incorrect Number$")
@@ -165,7 +167,7 @@ public class classsearch_Homepage_Automation {
 		@Then("^The search results page is displayed for correct keyword scenario$")
 		public void test_keyword(){
 			//String results=keyword();
-			assertThat(results,CoreMatchers.containsString("Showing"));
+			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			closeconnection();
 	}
 	//TEST9: Verify that search with only incorrect keyword produces proper warning message
@@ -205,7 +207,7 @@ public class classsearch_Homepage_Automation {
 				public void test_correct_keyword_Subject(){
 					//String results=correct_keyword_Subject();
 					closeconnection();
-					assertThat(results,CoreMatchers.containsString("Showing"));
+					MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			}
 				
 	//TEST 11: Verify that search with Correct Subject and  keyword produces Search results
@@ -244,7 +246,7 @@ public class classsearch_Homepage_Automation {
 				public void verifytoggleradio_open(){
 					String value=classearch_HomePage_Methods.verify_results("checkopenorall");
 					Assert.assertEquals("true",value);
-					classearch_HomePage_Methods.closeconn();
+					closeconnection();
 				}
 	//TEST 13: Verify that toggle the radio button changes the results
 				@When("^User selects for all classes and performs a search$")
@@ -264,7 +266,7 @@ public class classsearch_Homepage_Automation {
 				public void verifytoggleradio_all(){
 					String value=classearch_HomePage_Methods.verify_results("checkopenorall");
 					Assert.assertEquals("false",value);
-					classearch_HomePage_Methods.closeconn();
+					closeconnection();
 				}
 	//TEST 14: Verify that the results displayed contain only campus classes when in-Person is selected
 				@When("^User selects for in-person and performs a search$")
@@ -284,7 +286,7 @@ public class classsearch_Homepage_Automation {
 				public void verifytoggleradio_campus(){
 					String value=classearch_HomePage_Methods.verify_results("location");
 					Assert.assertEquals("true",value);
-					classearch_HomePage_Methods.closeconn();
+					closeconnection();
 				}
 	//TEST 15: Verify that the results displayed contain only ASUONLINE classes when online is selected
 				@When("^User selects for online and performs a search$")
@@ -304,7 +306,7 @@ public class classsearch_Homepage_Automation {
 				public void verifytoggleradio_online(){
 					String value=classearch_HomePage_Methods.verify_results("location");
 					Assert.assertEquals("false",value);
-					classearch_HomePage_Methods.closeconn();
+					closeconnection();
 				}
 				
 //TEST 16:
@@ -328,7 +330,7 @@ public class classsearch_Homepage_Automation {
 				public void verifySession_A(){
 					boolean session_verify=classearch_HomePage_Methods.verify_session(results);
 					Assert.assertEquals(session_verify, true);
-					classearch_HomePage_Methods.closeconn();
+					closeconnection();
 				}
 				@When("^User selects Session B and performs a search$")
 				public void Session_B(){
@@ -351,7 +353,7 @@ public class classsearch_Homepage_Automation {
 				public void verifySession_B(){
 					boolean session_verify=classearch_HomePage_Methods.verify_session(results);
 					Assert.assertEquals(session_verify, true);
-					classearch_HomePage_Methods.closeconn();
+					closeconnection();
 				}
 				@When("^User selects Session C and performs a search$")
 				public void Session_C(){
@@ -374,7 +376,7 @@ public class classsearch_Homepage_Automation {
 				public void verifySession_C(){
 					boolean session_verify=classearch_HomePage_Methods.verify_session(results);
 					Assert.assertEquals(session_verify, true);
-					classearch_HomePage_Methods.closeconn();
+					closeconnection();
 				}
 
 

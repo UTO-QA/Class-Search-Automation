@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class get_Input {
 	
-	public static String inputload(String key){
+	public static  String inputload(String key){
 	Properties prop = new Properties();
 	InputStream input = null;
 	String value=null;
@@ -33,7 +33,5 @@ public class get_Input {
 }
 	return value;
 	}
-	public static void main(String[]args){
-		inputload("TC_4");
-	}
+
 }
