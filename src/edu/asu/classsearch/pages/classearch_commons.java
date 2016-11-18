@@ -14,6 +14,12 @@ public class classearch_commons {
 		driver.get(url);
 		return driver;
 	}
+	public static String getUrl() {
+		return url;
+	}
+	public static void setUrl(String url) {
+		classearch_commons.url = url;
+	}
 	//close a connection
 	public static  void closeconn(){
 		driver.close();

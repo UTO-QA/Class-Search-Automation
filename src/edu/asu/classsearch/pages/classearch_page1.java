@@ -46,9 +46,18 @@ public class classearch_page1 {
 		WebElement elem=driver.findElement(By.xpath("//a[@id='DERIVED_REGFRM1_SSR_PB_ADDTOLIST2$106$']"));
 		return elem;
 	}
-	private WebElement Selectfrom_list(){
-		WebElement elem=driver.findElement(By.xpath("//input[@name='DERIVED_REGFRM1_SSR_SELECT$chk$0']"));
+	private List<WebElement> Selectfrom_list(){
+		List<WebElement> elem=driver.findElements(By.xpath("//table[@id='STDNT_ENRL_SSV1$scroll$0']//tr"));
 		return elem;
+	}
+	private WebElement drop_course(){
+		WebElement elem=driver.findElement(By.xpath("//a[@id='DERIVED_REGFRM1_LINK_DROP_ENRL']"));
+		return elem;
+	}
+	public void selct_course_to_drop(int num){
+		List<WebElement> elem=Selectfrom_list();
+		WebElement course=elem.get(num).findElement(By.xpath("//input[@id='DERIVED_REGFRM1_SSR_SELECT$"+num+"']"));
+		course.click();
 	}
 	public  void select_an_instructor(){
 		Select elem=instructor();
@@ -68,6 +77,10 @@ public class classearch_page1 {
 	}
 	public void action_enter(){
 		WebElement elem=Enter();
+		elem.click();
+	}
+	public void drop_a_course(){
+		WebElement elem=drop_course();
 		elem.click();
 	}
 	

@@ -24,7 +24,7 @@ public class classearch_page2 {
 		WebElement elem =driver.findElement(By.xpath("//a[@id='DERIVED_REGFRM1_LINK_ADD_ENRL$82$']"));
 		return elem;
 	}
-	private WebElement finishswapping(){
+	private WebElement finishstep(){
 		WebElement elem =driver.findElement(By.xpath("//a[@id='DERIVED_REGFRM1_SSR_PB_SUBMIT']"));
 		return elem;
 	}
@@ -40,8 +40,8 @@ public class classearch_page2 {
 		WebElement elem=step_2of3();
 		elem.click();
 	}
-	public  void action_finishswapping(){
-		WebElement elem=finishswapping();
+	public  void action_finishstep(){
+		WebElement elem=finishstep();
 		elem.click();
 	}
 

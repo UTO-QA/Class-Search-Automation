@@ -16,40 +16,30 @@ public class classearch_crosspage_functionalities {
 	private classearch_finalpage peoplesoft_3;
 	private classearch_HomePage_Methods cl;
 	private WebDriver driver;
-	//TC_19 Verify that the results displayed contain only Session C classes when session C is selected
 	@Given("^User is on ClassSearch Homepage$")
 	public void accesspage(){
 	driver=classearch_commons.getconn();
 	}
-	@When("^A user adds a class from class catalog$")
-	public void addcourse(){
-		String []values=get_Input.inputload("TC_19").split(",");
-		String openorall=values[0];
-		String course=values[1];
-		String number=values[2];
-		cl=new classearch_HomePage_Methods(driver);
-		cl.check_ifopenorall(openorall);
-		cl.subjectandnumber(course,number);
-		cl.performsearch();
-		cl.addcourse();
-		page=new Loginpage(driver);
-		page.get_login();
-		peoplesoft_1=new classearch_page1(driver);
-		peoplesoft_1.select_frame();
-		//peoplesoft_1.select_an_instructor();
-		peoplesoft_1.navigate_next();
-		peoplesoft_2=new classearch_page2(driver);
-		peoplesoft_2.select_frame();
-		peoplesoft_2.navigate_proceed_step_2of3();
-		peoplesoft_3=new classearch_finalpage(driver);
-		peoplesoft_3.select_frame();
-		peoplesoft_3.navigate_finishenrolling();
+	//TC_19 Verify that the results displayed contain only Session C classes when session C is selected
+	@When("^A user adds a class for testing (.*) from class catalog$")
+	public void addcourse(String value){
+		if(value.equals("addition"))
+			add("TC_19");
+		else if(value.equals("drop"))
+			add("TC_21");
+		else
+			return;
 	}
-	public  void addcourse(String Testcase){
-		String []values=get_Input.inputload("TC_21").split(",");
+	public  void add(String Testcase){
+		String []values=get_Input.inputload(Testcase).split(",");
 		String openorall=values[0];
 		String course=values[1];
 		String number=values[2];
+		
+		add(openorall, course, number);
+		
+	}
+	public void add(String openorall,String course,String number){
 		cl=new classearch_HomePage_Methods(driver);
 		cl.check_ifopenorall(openorall);
 		cl.subjectandnumber(course,number);
@@ -67,7 +57,6 @@ public class classearch_crosspage_functionalities {
 		peoplesoft_3=new classearch_finalpage(driver);
 		peoplesoft_3.select_frame();
 		peoplesoft_3.navigate_finishenrolling();
-		
 	}
 	@Then("^The class should be added succesfully to their schedule$")
 	public void verify_addedclass(){
@@ -94,7 +83,7 @@ public class classearch_crosspage_functionalities {
 		peoplesoft_1.navigate_next();
 		peoplesoft_2=new classearch_page2(driver);
 		peoplesoft_2.select_frame();
-		peoplesoft_2.action_finishswapping();
+		peoplesoft_2.action_finishstep();
 	}
 	@Then("^The class should be swapped succesfully to their schedule$")
 	public void verify_swapclass(){
@@ -105,15 +94,27 @@ public class classearch_crosspage_functionalities {
 		classearch_commons.closeconn();
 	}
   //TC_21
+	@When("^A user drops a class from class catalog$")
 	public void drop(){
-		addcourse("Tc_21");
-		cl=new classearch_HomePage_Methods(driver);
-		cl.signIn();
-		page=new Loginpage(driver);
-		page.get_login();
+		addcourse("drop");
+		//cl=new classearch_HomePage_Methods(driver);
+		//cl.signIn();
+		//page=new Loginpage(driver);
+		//page.get_login();
+		driver.get(classearch_commons.getUrl());
 		cl.Pregistrationaction("remove").click();
 		peoplesoft_1=new classearch_page1(driver);
 		peoplesoft_1.select_frame();
+		peoplesoft_1.selct_course_to_drop(1);
+		peoplesoft_1.drop_a_course();
+		peoplesoft_2=new classearch_page2(driver);
+		peoplesoft_2.action_finishstep();
+	}
+	@Then("^The class drop should be succesful$")
+	public void verify_drop(){
+		peoplesoft_3=new classearch_finalpage(driver);
+		Assert.assertNotEquals("",peoplesoft_3.verify_added().trim());
+		classearch_commons.closeconn();
 	}
 	
 }

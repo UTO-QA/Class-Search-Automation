@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import edu.classsearch.input.get_Input;
+
 public class Loginpage {
 	//property username
 	private  WebDriver driver;
@@ -37,11 +39,12 @@ public class Loginpage {
 	
 	public void get_login(){
 		Scanner sc=new Scanner(System.in);
-		
 		WebElement username=property_username();
 		final WebElement password=property_password();
-		username.sendKeys("baryasom");
-		password.sendKeys("Arya!1210409308");
+		get_Input login=new get_Input();
+		String cred[]=login.login().split(",");
+		username.sendKeys(cred[0]);
+		password.sendKeys(cred[1]);
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		WebElement submit=property_submit();
 		submit.click();

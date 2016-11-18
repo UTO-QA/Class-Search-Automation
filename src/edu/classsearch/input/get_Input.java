@@ -33,5 +33,33 @@ public class get_Input {
 }
 	return value;
 	}
+	public static  String login(){
+		Properties prop = new Properties();
+		InputStream input = null;
+		String value=null,value1=null;
+		try {
+
+			input = new FileInputStream("resources/inputdata/login.properties");
+
+			// load a properties file
+			prop.load(input);
+			value=prop.getProperty("username");
+			value.trim();
+			value1=prop.getProperty("password");
+			value1.trim();
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+	}
+		return value+","+value1;
+		}
 
 }
