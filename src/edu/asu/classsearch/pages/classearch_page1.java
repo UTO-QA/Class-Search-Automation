@@ -15,7 +15,6 @@ public class classearch_page1 {
 	
 	private  WebDriver driver;
 	public classearch_page1(WebDriver driver) {
-		// TODO Auto-generated constructor stub
 		this.driver=driver;
 	}
 	//property

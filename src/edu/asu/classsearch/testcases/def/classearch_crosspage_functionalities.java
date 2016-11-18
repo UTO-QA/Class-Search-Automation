@@ -21,6 +21,7 @@ public class classearch_crosspage_functionalities {
 	driver=classearch_commons.getconn();
 	}
 	//TC_19 Verify that the results displayed contain only Session C classes when session C is selected
+	
 	@When("^A user adds a class for testing (.*) from class catalog$")
 	public void addcourse(String value){
 		if(value.equals("addition"))

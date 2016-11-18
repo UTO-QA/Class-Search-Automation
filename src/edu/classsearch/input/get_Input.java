@@ -8,7 +8,7 @@ import java.util.Properties;
 public class get_Input {
 	
 	public static  String inputload(String key){
-	Properties prop = new Properties();
+ 	Properties prop = new Properties();
 	InputStream input = null;
 	String value=null;
 	try {

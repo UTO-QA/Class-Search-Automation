@@ -23,6 +23,14 @@ public class classearch_HomePage_Methods {
 	//make a connection using Firefox Driver
 	
 	//Property for handling search button
+	private WebElement property_classsearch(){
+		WebElement elem=driver.findElement(By.xpath("//a[@class='changeType' and  @rel='S']"));
+		return elem;	
+	}
+	private WebElement property_classcatalog(){
+		WebElement elem=driver.findElement(By.xpath("//a[@class='changeType' and  @rel='C']"));
+		return elem;	
+	}
 	private  WebElement property_search_button(){
 		WebElement elem=driver.findElement(By.xpath("//button[@id='submitForm']"));
 		return elem;
@@ -54,6 +62,10 @@ public class classearch_HomePage_Methods {
 	private  WebElement property_keyword(){
 		WebElement elem=driver.findElement(By.id("keywords"));
 		elem.clear();
+		return elem;
+	}
+	private List<WebElement> list_location(){
+		List<WebElement> elem=driver.findElements(By.xpath("//table[@id='campusFilter']//tr//label"));
 		return elem;
 	}
 	//Property for accessing open radio button
@@ -131,6 +143,8 @@ public class classearch_HomePage_Methods {
 		return null;
 			
 	}
+	public List<WebElement> location(){
+	return list_location();}
 	public void signIn(){
 		WebElement elem=property_signIn();
 		elem.click();
@@ -261,5 +275,11 @@ public class classearch_HomePage_Methods {
 		}
 		return Text;
 	}
-
+	public WebElement classearch(){
+		return property_classsearch();
+		
+	}
+	public WebElement classcatalog(){
+	return property_classcatalog();
+	}
 }
