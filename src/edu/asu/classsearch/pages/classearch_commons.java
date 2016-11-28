@@ -4,9 +4,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -30,16 +32,21 @@ public class classearch_commons {
 			driver=new FirefoxDriver();
 		}
 		else{
-			DesiredCapabilities capability = DesiredCapabilities.phantomjs();
-			driver=new PhantomJSDriver(capability); 
+			Capabilities caps = new DesiredCapabilities();
+            ((DesiredCapabilities) caps).setJavascriptEnabled(true);                
+            ((DesiredCapabilities) caps).setCapability("takesScreenshot", true);  
+            ((DesiredCapabilities) caps).setCapability(
+                    PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                    "C:\\Users\\bharadwaj\\Desktop\\phantomjs.exe");
+            driver=new PhantomJSDriver(caps);
 		}
 			
 		return driver;
 
 	}
 	public static  WebDriver getconn(){
-		driver=select_driver("remote");
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver=select_driver("firefox");
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(url);
 		return driver;
