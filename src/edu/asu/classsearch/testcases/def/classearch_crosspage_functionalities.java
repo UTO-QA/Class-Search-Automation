@@ -58,11 +58,13 @@ public class classearch_crosspage_functionalities {
 		peoplesoft_3=new classearch_finalpage(driver);
 		peoplesoft_3.select_frame();
 		peoplesoft_3.navigate_finishenrolling();
+		System.out.println("Reached before");
 	}
 	@Then("^The class should be added succesfully to their schedule$")
 	public void verify_addedclass(){
 		String actual=peoplesoft_3.verify_added();
 		Assert.assertEquals("Success: This class has been added to your schedule.".trim(),actual.trim() );
+		System.out.println("Reached End");
 		classearch_commons.closeconn();
 	}
 	//TC_20 

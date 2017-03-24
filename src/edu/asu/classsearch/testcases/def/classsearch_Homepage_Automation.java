@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.asu.classsearch.pages.ClassSearchResults_Validator;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
 import edu.asu.classsearch.pages.classearch_commons;
 import edu.classsearch.input.get_Input;
@@ -19,11 +20,16 @@ public class classsearch_Homepage_Automation {
 	private WebDriver driver;
 	private String results;
 	private String results_1;
+	
+	//New Class to Validate Search Results
+	private ClassSearchResults_Validator val;
+	private String validateString="";
 	//creates a connection
 	@Given("^The user is on Class Search page$")
 	public void getconnection(){
 		driver=classearch_commons.getconn();
 		classearch_HomePage_Methods=new classearch_HomePage_Methods(driver);
+		val=new ClassSearchResults_Validator(driver);
 	}
 	//delete a connection
 	public void closeconnection(){
@@ -34,6 +40,7 @@ public class classsearch_Homepage_Automation {
 	public void Postive1_subject(){
 		String []values=get_Input.inputload("TC_1").split(",");
 		String searchterm=values[0];
+		validateString=searchterm;
 		classearch_HomePage_Methods.subject(searchterm);
 		classearch_HomePage_Methods.performsearch();
 	  this.results=classearch_HomePage_Methods.assertresults();
@@ -42,8 +49,9 @@ public class classsearch_Homepage_Automation {
 	@Then("^The Results with correct subject info should be Displayed$")
 	public void test_Positive1_subject(){
 		//String results=Postive1_subject();
-		closeconnection();
+		val.validateSubjectName(validateString);
 		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		closeconnection();
 		
 	}
 	//TEST2: CHECK if course rejects Negative Subject
@@ -69,6 +77,7 @@ public class classsearch_Homepage_Automation {
 			String []values=get_Input.inputload("TC_3").split(",");
 			String searchterm=values[0];
 			String number=values[1];
+			validateString=searchterm+" "+number;
 			classearch_HomePage_Methods.subjectandnumber(searchterm,number);
 			classearch_HomePage_Methods.performsearch();
 		    results=classearch_HomePage_Methods.assertresults();
@@ -78,6 +87,7 @@ public class classsearch_Homepage_Automation {
 		@Then("^The Results should be Displayed for Correct Subject and Number scenario$")
 		public void test_subject_number(){
 			//String results=subject_number();
+			val.validateSubjectName(validateString);
 			closeconnection();
 			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 		}
@@ -198,14 +208,16 @@ public class classsearch_Homepage_Automation {
 					String []values=get_Input.inputload("TC_10").split(",");
 					String Subject=values[0];
 					String keyword=values[1];
-							classearch_HomePage_Methods.keywordanddsubject(Subject, keyword);
-							classearch_HomePage_Methods.performsearch();
-							this.results=classearch_HomePage_Methods.assertresults();
+					validateString=Subject;
+					classearch_HomePage_Methods.keywordanddsubject(Subject, keyword);
+					classearch_HomePage_Methods.performsearch();
+					this.results=classearch_HomePage_Methods.assertresults();
 							
 					}
 				@Then("^The Search Results page is Displayed for correct keyword and subject scenario$")
 				public void test_correct_keyword_Subject(){
 					//String results=correct_keyword_Subject();
+					val.validateSubjectName(validateString);
 					closeconnection();
 					MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			}

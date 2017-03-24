@@ -18,10 +18,7 @@ public class classearch_HomePage_Methods {
 		// TODO Auto-generated constructor stub
 		this.driver=driver;
 	}
-	//url for testing
-	private  String url="https://webapp4-qa.asu.edu/catalog";
-	//make a connection using Firefox Driver
-	
+
 	//Property for handling search button
 	private WebElement property_classsearch(){
 		WebElement elem=driver.findElement(By.xpath("//a[@class='changeType' and  @rel='S']"));
@@ -282,4 +279,5 @@ public class classearch_HomePage_Methods {
 	public WebElement classcatalog(){
 	return property_classcatalog();
 	}
+
 }
