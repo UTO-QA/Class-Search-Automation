@@ -1,6 +1,7 @@
 Feature: Class Search verify Radio buttons open-all,inperson-online and session checkbox
 
-Scenario: TC_19 Verify that the results displayed contain only Session C classes when session C is selected 
-		Given User is on ClassSearch Homepage
-		When A user adds a class for testing addition from class catalog
-		Then The class should be added succesfully to their schedule
+			
+	Scenario: TC_30 Verify user searchs using General Studies option only classes with the chosen GS category should return
+		Given The user is on Class Search page Advanced Search
+		When  User performs a search using General Studies option
+		Then The Results must display only classes with the chosen GS category

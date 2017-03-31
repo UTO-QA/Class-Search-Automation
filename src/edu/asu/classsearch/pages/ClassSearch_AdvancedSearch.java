@@ -74,14 +74,18 @@ public class ClassSearch_AdvancedSearch {
 		return elem;
 	}
 	
-	//TODO: 
-	//	Instructor	
-	//	Start 
-	//	Date	
-	//	End Date	
-	//	Honors	
-	// College/Schools	Level General Studies Project-based
+	private Select generalStudiesOption1(){
+		Select elem=new Select(driver.findElement(By.xpath("//*[@id='gsAw']")));
+		return elem;
+	}
+
+	private Select generalStudiesOption2(){
+		Select elem=new Select(driver.findElement(By.xpath("//*[@id='addGsAw']")));
+		return elem;
+	}
 	
+
+
 	public void clickAdvancedSearch(){
 		WebElement element=advancedSearch();
 		element.click();
@@ -141,6 +145,16 @@ public class ClassSearch_AdvancedSearch {
 	public void selectGeneralStudies(String gs){
 		Select element= generalStudies();
 		element.selectByVisibleText(gs);
+	}
+	
+	public void selectGeneralStudiesOption1(String gs1){
+		Select element= generalStudiesOption1();
+		element.selectByVisibleText(gs1);
+	}
+	
+	public void selectGeneralStudiesOption2(String gs2){
+		Select element= generalStudiesOption2();
+		element.selectByVisibleText(gs2);
 	}
 
 	

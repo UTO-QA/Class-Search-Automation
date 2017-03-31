@@ -10,7 +10,7 @@ public class get_Input {
 	public static  String inputload(String key){
  	Properties prop = new Properties();
 	InputStream input = null;
-	String value=null;
+	String value=",";
 	try {
 
 		input = new FileInputStream("resources/inputdata/input.properties");
@@ -30,9 +30,10 @@ public class get_Input {
 				e.printStackTrace();
 			}
 		}
-}
+	}
 	return value;
 	}
+	
 	public static  String login(){
 		Properties prop = new Properties();
 		InputStream input = null;

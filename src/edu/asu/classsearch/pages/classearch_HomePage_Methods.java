@@ -1,17 +1,13 @@
 package edu.asu.classsearch.pages;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import cucumber.api.java.*;
-import cucumber.api.java.en.And;
 public class classearch_HomePage_Methods {
 	private  WebDriver driver;
 	public classearch_HomePage_Methods(WebDriver driver) {
