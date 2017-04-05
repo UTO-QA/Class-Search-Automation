@@ -1,4 +1,4 @@
-Feature: Class Search verify Radio buttons open-all,inperson-online and session checkbox
+Feature: Class Search verify Advanced Search
 	
 	Scenario: TC_22 Verify user provides correct Subject and Instructor
 		Given The user is on Class Search page Advanced Search

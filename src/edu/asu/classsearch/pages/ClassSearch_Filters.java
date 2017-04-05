@@ -51,10 +51,7 @@ public class ClassSearch_Filters {
 		return elem;
 	}
 	
-	//*[@id="sessionA"]
-	//*[@id="sessionB"]
-	//*[@id="sessionC"]
-	//*[@id="sessionDYN"]
+	//*[@id="sessionA"]	//*[@id="sessionB"]	//*[@id="sessionC"]	//*[@id="sessionDYN"]
 	
 	private WebElement sessionFilter(String session){
 		WebElement elem=this.driver.findElement(By.xpath("//*[@id='session"+session+"']"));
@@ -65,7 +62,5 @@ public class ClassSearch_Filters {
 		WebElement elem=this.driver.findElement(By.xpath(locationxPath.get(location)));
 		return elem;
 	}
-	
-
 
 }

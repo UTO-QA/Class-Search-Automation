@@ -34,7 +34,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		val=new ClassSearchResults_Validator(driver);
 		home=new classearch_HomePage_Methods(driver);
 		
-		prodDriver=classearch_commons.getconn("https://webapp4-dev.asu.edu/elastic-catalog/");
+		prodDriver=classearch_commons.getconn("https://webapp4-dev.asu.edu/catalog/");
 		prodAdv=new ClassSearch_AdvancedSearch(prodDriver);
 		prodHome=new classearch_HomePage_Methods(prodDriver);
 }
@@ -73,7 +73,6 @@ public class ClassSearch_AdvancedSearch_Automation {
 						  
 		val.verifyResultWithProd(prodDriver);
 
-
 		driver.quit();
 		prodDriver.quit();
 		
@@ -105,7 +104,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 	public void validate_CollegeSchool(){
 		//TODO: See if there is a way to validate collegeSchool
 		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		
+		val.verifyResultWithProd(prodDriver);
+
 		driver.quit();
+		prodDriver.quit();
 	}
 
 	@When("^User selects # of Units and subject and performs search$")
@@ -136,7 +139,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 		val.validateSubjectName(validateString[0]);
 		val.validateNumberOfUnits(validateString[1]);
 		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		
+		val.verifyResultWithProd(prodDriver);
+
 		driver.quit();
+		prodDriver.quit();
 	}
 	
 	@When("^User selects Class # and subject and performs search$")
@@ -168,7 +175,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 		val.validateSubjectName(validateString[0]);
 		val.validateClassNumber(validateString[1]);
 		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		
+		val.verifyResultWithProd(prodDriver);
+
 		driver.quit();
+		prodDriver.quit();
 	}
 	
 	@When("^User enters Start Date and subject and performs search$")
@@ -233,7 +244,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 			val.validateSubjectName(validateString[0]);
 			val.validateEndDate(validateString[1]);
 			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+			
+			val.verifyResultWithProd(prodDriver);
+
 			driver.quit();
+			prodDriver.quit();
 			
 		}
 
@@ -264,7 +279,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 			val.validateSubjectName(validateString[0]);
 			val.validateHonorsTitle();
 			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+			
+			val.verifyResultWithProd(prodDriver);
+
 			driver.quit();
+			prodDriver.quit();
 			
 		}
 		
@@ -295,7 +314,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 			val.validateSubjectName(validateString[0]);
 			val.validatePromod();
 			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+			
+			val.verifyResultWithProd(prodDriver);
+
 			driver.quit();
+			prodDriver.quit();
 			
 		}
 		
@@ -344,7 +367,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 			//Validate Subject Details and Instructor Details
 			val.validateGeneralStudies(validateString);
 			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+			
+			val.verifyResultWithProd(prodDriver);
+
 			driver.quit();
+			prodDriver.quit();
 			
 		}
 
@@ -377,7 +404,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 			val.validateSubjectName(validateString[0]);
 			//TODO: Validate Level
 			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+			
+			val.verifyResultWithProd(prodDriver);
+
 			driver.quit();
+			prodDriver.quit();
 			
 		}
 		
@@ -404,7 +435,11 @@ public class ClassSearch_AdvancedSearch_Automation {
 			val.validateSubjectName(validateString[0]);
 			val.validateInstructorName(validateString[1]);
 			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+			
+			val.verifyResultWithProd(prodDriver);
+
 			driver.quit();
+			prodDriver.quit();
 			
 		}
 

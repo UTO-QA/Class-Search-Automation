@@ -224,6 +224,21 @@ public class ClassSearchResults_Validator {
 			}
 			
 		}
+		
+		public void validateClassTitleAndIns(String title){
+			List<WebElement> classTitleList=this.driver.findElements(By.className("titleColumnValue"));
+			List<WebElement> instructorList=this.driver.findElements(By.className("instructorListColumnValue"));
+
+			for(int i=0;i<classTitleList.size();i++){
+				
+				String classTitle=classTitleList.get(i).getText().toLowerCase();
+				String instructor=instructorList.get(i).getText().toLowerCase();
+				title=title.toLowerCase();
+				MatcherAssert.assertThat(title + " must match "+classTitle+" or "+instructor,classTitle.contains((title)) || instructor.contains(title));
+				System.out.println("Validated using "+title);
+			}
+			
+		}
 
 	
 }
