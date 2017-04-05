@@ -8,10 +8,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.asu.classsearch.input.get_Input;
 import edu.asu.classsearch.pages.ClassSearchResults_Validator;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
 import edu.asu.classsearch.pages.classearch_commons;
-import edu.classsearch.input.get_Input;
 import junit.framework.Assert;
 
 public class classsearch_Homepage_Automation {

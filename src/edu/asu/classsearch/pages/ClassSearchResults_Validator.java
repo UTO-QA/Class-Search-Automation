@@ -194,6 +194,36 @@ public class ClassSearchResults_Validator {
 			
 			
 		}
+		
+		public void verifyWithProd(WebDriver prodDriver){
+			//Verify the result count
+				String countInProd=prodDriver.findElement(By.xpath("//*[@id='CatalogList_info']")).getText();
+				String count=driver.findElement(By.xpath("//*[@id='CatalogList_info']")).getText();
+				MatcherAssert.assertThat(count, CoreMatchers.equalTo(countInProd));
+		}
+		
+		public void verifyResultWithProd(WebDriver prodDriver){
+			//Verify the result count
+			List<String> tableColumnIDList=new ArrayList<String>();
+			tableColumnIDList.addAll(Arrays.asList("subjectNumberColumnValue","titleColumnValue","classNbrColumnValue",
+					"instructorListColumnValue","dayListColumnValue","startTimeDateColumnValue",
+					"endTimeDateColumnValue","locationBuildingColumnValue","startDateColumnValue","hoursColumnValue",
+					"availableSeatsColumnValue","tooltipRqDesDescrColumnValue"));
+			
+			for(String td:tableColumnIDList){
+				List<WebElement> wList1=this.driver.findElements(By.className(td));
+				List<WebElement> wList2=prodDriver.findElements(By.className(td));
+				
+				MatcherAssert.assertThat(wList1, hasSize(wList2.size()));
+				
+				for(int i=0;i<wList1.size();i++){
+					//System.out.println(wList1.get(i).getText()+"-"+wList2.get(i).getText());
+					MatcherAssert.assertThat(wList1.get(i).getText(), CoreMatchers.equalTo((wList2.get(i).getText())));
+				}
+				
+			}
+			
+		}
 
 	
 }

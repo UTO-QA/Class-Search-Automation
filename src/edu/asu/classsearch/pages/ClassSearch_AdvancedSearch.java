@@ -83,8 +83,6 @@ public class ClassSearch_AdvancedSearch {
 		Select elem=new Select(driver.findElement(By.xpath("//*[@id='addGsAw']")));
 		return elem;
 	}
-	
-
 
 	public void clickAdvancedSearch(){
 		WebElement element=advancedSearch();

@@ -43,6 +43,15 @@ public class classearch_commons {
 		driver.get(url);
 		return driver;
 	}
+	
+	public static  WebDriver getconn(String classSearchURL){
+		driver=select_driver("firefox");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.get(classSearchURL);
+		return driver;
+	}
+	
 	public static String getUrl() {
 		return url;
 	}

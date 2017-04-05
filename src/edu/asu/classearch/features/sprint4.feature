@@ -40,18 +40,18 @@ Feature: Class Search verify Radio buttons open-all,inperson-online and session 
 		When  User performs a search using the correct Subject and checks Project-based check box
 		Then The Results must display only Promod block classes or individual classes designated as project based with a special note 0018
 		
-	Scenario: TC_30 Verify user searchs using General Studies option only classes with the chosen GS category should return
+	Scenario: TC_30 Verify user searches using General Studies option only classes with the chosen GS category should return
 		Given The user is on Class Search page Advanced Search
 		When  User performs a search using General Studies option
-		Then The Results must display only classes with the chosen GS category
+		Then The Results must display only classes with the chosen GS category		
 		
+	Scenario: TC_31 Verify user searches using subject and level options only classes in the level or division chosen should return
+		Given The user is on Class Search page Advanced Search
+		When  User performs a search using Subject and Level
+		Then The Results must display only classes in the level or division chosen
 		
-		
-		
-		
-		
-		
-		
-
-		
+	Scenario: TC_32 Verify user searches using subject and level options only classes with the specified Instructor should return
+		Given The user is on Class Search page Advanced Search
+		When  User performs a search using Subject and Instructor
+		Then The Results must display only classes with the specified Instructor				
 	

@@ -1,4 +1,4 @@
-package edu.classsearch.input;
+package edu.asu.classsearch.input;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,6 +33,7 @@ public class get_Input {
 	}
 	return value;
 	}
+	
 	
 	public static  String login(){
 		Properties prop = new Properties();

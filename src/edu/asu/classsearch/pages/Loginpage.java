@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import edu.classsearch.input.get_Input;
+import edu.asu.classsearch.input.get_Input;
 
 public class Loginpage {
 	//property username
