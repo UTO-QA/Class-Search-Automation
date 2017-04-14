@@ -36,7 +36,7 @@ public class ClassSearchResults_Validator {
 		try{
 			List<WebElement> instructorList=driver.findElements(By.className("instructorListColumnValue"));
 			for(WebElement w:instructorList){
-				MatcherAssert.assertThat(w.getText(), CoreMatchers.containsString(instructor));
+				MatcherAssert.assertThat(instructor, CoreMatchers.containsString(w.getText()));
 				System.out.println("Validated Against "+w.getText());
 			}
 		}
@@ -202,13 +202,39 @@ public class ClassSearchResults_Validator {
 				MatcherAssert.assertThat(count, CoreMatchers.equalTo(countInProd));
 		}
 		
+		public  String resultMessage(WebDriver driver){
+			String Text;
+			try{
+			WebElement elem=driver.findElement(By.id("CatalogList"));
+			WebElement elem1=driver.findElement(By.id("CatalogList_info"));
+			Text=elem1.getText();
+			}
+			catch (org.openqa.selenium.NoSuchElementException e) {
+			WebElement	elem=driver.findElement(By.className("error_msg"));
+			Text=elem.getText();
+			}
+			return Text;
+		}
+		
 		public void verifyResultWithProd(WebDriver prodDriver){
 			//Verify the result count
+			
+			System.out.println("Starting to compare the results");
+			String countInProd=resultMessage(prodDriver);
+			String count=resultMessage(driver);
+			MatcherAssert.assertThat(count, CoreMatchers.equalTo(countInProd));
+			
 			List<String> tableColumnIDList=new ArrayList<String>();
-			tableColumnIDList.addAll(Arrays.asList("subjectNumberColumnValue","titleColumnValue","classNbrColumnValue",
+			
+//Complete Table Verification.
+/*			tableColumnIDList.addAll(Arrays.asList("subjectNumberColumnValue","titleColumnValue","classNbrColumnValue",
 					"instructorListColumnValue","dayListColumnValue","startTimeDateColumnValue",
 					"endTimeDateColumnValue","locationBuildingColumnValue","startDateColumnValue","hoursColumnValue",
 					"availableSeatsColumnValue","tooltipRqDesDescrColumnValue"));
+*/			
+			
+//Verify just the subject column
+			tableColumnIDList.addAll(Arrays.asList("subjectNumberColumnValue"));
 			
 			for(String td:tableColumnIDList){
 				List<WebElement> wList1=this.driver.findElements(By.className(td));
@@ -218,10 +244,12 @@ public class ClassSearchResults_Validator {
 				
 				for(int i=0;i<wList1.size();i++){
 					//System.out.println(wList1.get(i).getText()+"-"+wList2.get(i).getText());
-					MatcherAssert.assertThat(wList1.get(i).getText(), CoreMatchers.equalTo((wList2.get(i).getText())));
+					MatcherAssert.assertThat(wList1.get(i).getText().trim(), CoreMatchers.equalTo((wList2.get(i).getText()).trim()));
 				}
 				
 			}
+			
+			System.out.println("Compared both the result tables");
 			
 		}
 		

@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.asu.classearch.driver.ClassSearch_Driver;
 import edu.asu.classsearch.input.get_Input;
 import edu.asu.classsearch.pages.ClassSearchResults_Validator;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
@@ -27,7 +28,7 @@ public class classsearch_Homepage_Automation {
 	//creates a connection
 	@Given("^The user is on Class Search page$")
 	public void getconnection(){
-		driver=classearch_commons.getconn();
+		driver=ClassSearch_Driver.getInstance();
 		classearch_HomePage_Methods=new classearch_HomePage_Methods(driver);
 		val=new ClassSearchResults_Validator(driver);
 	}

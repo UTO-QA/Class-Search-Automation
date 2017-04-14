@@ -50,8 +50,4 @@ Feature: Class Search verify Advanced Search
 		When  User performs a search using Subject and Level
 		Then The Results must display only classes in the level or division chosen
 		
-	Scenario: TC_32 Verify user searches using subject and level options only classes with the specified Instructor should return
-		Given The user is on Class Search page Advanced Search
-		When  User performs a search using Subject and Instructor
-		Then The Results must display only classes with the specified Instructor				
 	

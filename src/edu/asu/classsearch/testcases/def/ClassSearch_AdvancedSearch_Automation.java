@@ -37,7 +37,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		prodDriver=classearch_commons.getconn("https://webapp4-dev.asu.edu/catalog/");
 		prodAdv=new ClassSearch_AdvancedSearch(prodDriver);
 		prodHome=new classearch_HomePage_Methods(prodDriver);
-}
+	}
 	
 	//22: User Enters correct subject and instructor 
 	@When("^User performs a search using the correct Subject and Instructor$")
@@ -68,7 +68,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 	public void validate_Subject_Instructor(){
 		//Validate Subject Details and Instructor Details
 		val.validateSubjectName(validateString[0]);
-		val.validateInstructorName(validateString[1]);
+		//val.validateInstructorName(validateString[1]);
 		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 						  
 		val.verifyResultWithProd(prodDriver);
@@ -211,7 +211,9 @@ public class ClassSearch_AdvancedSearch_Automation {
 		val.validateSubjectName(validateString[0]);
 		val.validateStartDate(validateString[1]);
 		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		val.verifyResultWithProd(prodDriver);
 		driver.quit();
+		prodDriver.quit();
 	}
 	
 	//27: User Enters correct subject and End Date 
@@ -273,6 +275,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 			this.results=home.assertresults();
 
 		}
+		
 		@Then("^The Results must display only honors classes or classes that offer honors enrichment contracts$")
 		public void validate_Honors(){
 			//Validate Subject Details and Instructor Details
@@ -403,37 +406,6 @@ public class ClassSearch_AdvancedSearch_Automation {
 			//Validate Subject Details and Instructor Details
 			val.validateSubjectName(validateString[0]);
 			//TODO: Validate Level
-			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
-			
-			val.verifyResultWithProd(prodDriver);
-
-			driver.quit();
-			prodDriver.quit();
-			
-		}
-		
-		//32: User Enters correct subject and Instructor 
-		@When("^User performs a search using Subject and Instructor$")
-		public void positive_Instructor(){
-			String []values=get_Input.inputload("TC_32").split(",");
-			String subject=values[0];
-			String instr=values[1];
-			validateString=new String[2];
-			validateString[0]=subject;
-			validateString[1]=instr;
-	
-			home.subject(subject);
-			adv.clickAdvancedSearch();
-			adv.enterInstructorName(instr);
-			home.performsearch();
-		  this.results=home.assertresults();
-
-		}
-		@Then("^The Results must display only classes with the specified Instructor$")
-		public void validate_Instructor(){
-			//Validate Subject Details and Instructor Details
-			val.validateSubjectName(validateString[0]);
-			val.validateInstructorName(validateString[1]);
 			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			
 			val.verifyResultWithProd(prodDriver);
