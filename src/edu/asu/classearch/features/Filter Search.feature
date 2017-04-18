@@ -44,4 +44,8 @@ Feature: Class Search verify Advanced Search
 		Given The user is on Class Search page Filter Search
 		When User performs a search with School and applies Days filter
 		Then Results should return any class with any day in the filter set
-		
+	
+	Scenario: TC_51 Verify Filter Search Criteria with Filter by Start and End Times
+		Given The user is on Class Search page Filter Search
+		When User performs a search with Subject and applies Time Filter
+		Then All classes returned should start after the start time and end before end time

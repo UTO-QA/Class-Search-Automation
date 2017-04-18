@@ -219,7 +219,7 @@ public class ClassSearchResults_Validator {
 		public void verifyResultWithProd(WebDriver prodDriver){
 			//Verify the result count
 			
-			System.out.println("Starting to compare the results");
+		
 			String countInProd=resultMessage(prodDriver);
 			String count=resultMessage(driver);
 			MatcherAssert.assertThat(count, CoreMatchers.equalTo(countInProd));
@@ -235,7 +235,7 @@ public class ClassSearchResults_Validator {
 			
 //Verify just the subject column
 			tableColumnIDList.addAll(Arrays.asList("subjectNumberColumnValue"));
-			
+			System.out.println("Starting to compare the results");
 			for(String td:tableColumnIDList){
 				List<WebElement> wList1=this.driver.findElements(By.className(td));
 				List<WebElement> wList2=prodDriver.findElements(By.className(td));

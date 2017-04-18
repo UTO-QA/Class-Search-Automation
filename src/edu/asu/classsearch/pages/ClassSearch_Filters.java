@@ -74,7 +74,20 @@ public class ClassSearch_Filters {
 		WebElement elem=this.driver.findElement(By.xpath("//*[@id='filter-by-day']/i"));
 		return elem;
 	}
+	private WebElement timeFilterPlus(){
+		WebElement elem=this.driver.findElement(By.xpath("//*[@id='filter-by-time']/i"));
+		return elem;
+	}
 	
+	private WebElement startTime(){
+		WebElement elem=this.driver.findElement(By.xpath("//*[@id='startTime']"));
+		return elem;
+	}
+	
+	private WebElement endTime(){
+		WebElement elem=this.driver.findElement(By.xpath("//*[@id='endTime']"));
+		return elem;
+	}
 	
 	public void toggleInPerson(){
 		WebElement elem=inPerson();
@@ -107,6 +120,15 @@ public class ClassSearch_Filters {
 	}
 	
 	public void filterBySession(List<String> sessions){
+		
+		unCheckSessions();
+		for(String s:sessions){
+			WebElement elem=sessionFilter(s);			
+			elem.click();	
+		}
+	}
+	
+	public void filterBySession(String[] sessions){
 		
 		unCheckSessions();
 		for(String s:sessions){
@@ -148,6 +170,17 @@ public class ClassSearch_Filters {
 		}
 	}
 	
+	public void filterByLocation(String[] locations){
+		
+		unCheckLocations();
+		for(String loc:locations){
+			WebElement elem=locationFilter(locationxPath.get(loc));
+			elem.click();
+			
+		}
+	}
+	
+	
 	private void uncheckDays(){
 		String []days={"M","T","W","Th","F","S","Su"};
 		for(String d:days){
@@ -166,10 +199,33 @@ public class ClassSearch_Filters {
 			elem.click();
 		}
 	}
+	public void filterByDaysOfWeek(String[] days){
+		
+		uncheckDays();
+		for(String d:days){
+			WebElement elem=dayOfWeek(d);
+			elem.click();
+		}
+	}
 	
 	public void expandDaysFilter(){
 		WebElement elem=daysFilterPlus();
 		elem.click();
+	}
+	
+	public void expandTimeFilter(){
+		WebElement elem=timeFilterPlus();
+		elem.click();
+	}
+	
+	public void enterStartTime(String time){
+		WebElement elem=startTime();
+		elem.sendKeys(time);
+	}
+	
+	public void enterEndTime(String time){
+		WebElement elem=endTime();
+		elem.sendKeys(time);
 	}
 	
 

@@ -249,7 +249,13 @@ public class classearch_HomePage_Methods {
 		WebElement elem=property_search_button();
 		WebDriverWait wait = new WebDriverWait(driver,30); //this is explicit wait
 		wait.until(ExpectedConditions.elementToBeClickable(elem));
+		Long start=System.nanoTime();
 		elem.click();
+		Long mid=System.nanoTime();
+		
+		String url=driver.getCurrentUrl();
+		url=url.substring(0,url.indexOf("classlist"));
+		System.out.println(url+" Search Time: "+TimeUnit.NANOSECONDS.toSeconds(mid-start)+"s");	
 	}
 	public  void addcourse(){
 		WebElement elem=property_getclass();

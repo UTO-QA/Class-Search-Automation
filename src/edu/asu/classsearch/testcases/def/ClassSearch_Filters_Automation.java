@@ -3,11 +3,7 @@ package edu.asu.classsearch.testcases.def;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
 
 import cucumber.api.Scenario;
@@ -16,7 +12,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import edu.asu.classearch.driver.ClassSearch_Driver;
 import edu.asu.classsearch.input.get_Input;
 import edu.asu.classsearch.pages.ClassSearchResults_Validator;
 import edu.asu.classsearch.pages.ClassSearch_AdvancedSearch;
@@ -319,7 +314,7 @@ public class ClassSearch_Filters_Automation {
 		
 	}
 	
-	//TC_48
+	//TC_50
 	@When("^User performs a search with School and applies Days filter$")
 	public void filters_School_Days(){
 		String []values=get_Input.inputload(testCase).split(",");
@@ -366,4 +361,39 @@ public class ClassSearch_Filters_Automation {
 		prodDriver.quit();
 	}
 
+	
+	//TC_51
+	@When("^User performs a search with Subject and applies Time Filter$")
+	public void filters_Subject_Time(){
+		String []values=get_Input.inputload(testCase).split(",");
+		String subject=values[0];
+		home.subject(subject);
+		prodHome.subject(subject);
+		
+		home.performsearch();
+		prodHome.performsearch();
+		
+	}
+	@Then("^All classes returned should start after the start time and end before end time$")
+	public void verify_Subject_Time(){
+		//String results=subject_number();
+		String []values=get_Input.inputload(testCase).split(",");
+		String startTime=values[1];
+		String endTime="";
+		
+		if(values.length>2) {
+			endTime=values[2];
+		}
+		
+		filters.expandTimeFilter();
+		prodFilters.expandTimeFilter();
+		
+		filters.enterStartTime(startTime);
+		filters.enterEndTime(endTime);
+		prodFilters.enterStartTime(startTime);
+		prodFilters.enterEndTime(endTime);
+		
+		driver.quit();
+		prodDriver.quit();
+	}
 }

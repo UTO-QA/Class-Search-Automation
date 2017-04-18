@@ -17,8 +17,8 @@ import edu.asu.classsearch.pages.classearch_commons;
 
 public class ClassSearch_KeywordSearch {
 
-	WebDriver driver;
-	classearch_HomePage_Methods home;
+	WebDriver driver,prodDriver;
+	classearch_HomePage_Methods home,prodHome;
 	ClassSearchResults_Validator val;
 	String validateString[];
 	String results;
@@ -33,9 +33,11 @@ public class ClassSearch_KeywordSearch {
 	@Given("^The user is on Class Search page to search using Keyword$")
 	public void getconnection(){
 		driver=classearch_commons.getconn("https://webapp4-dev.asu.edu/elastic-catalog/");
+		prodDriver=classearch_commons.getconn("https://webapp4-dev.asu.edu/catalog/");
 		
 		val=new ClassSearchResults_Validator(driver);
 		home=new classearch_HomePage_Methods(driver);
+		prodHome=new classearch_HomePage_Methods(prodDriver);
 	}
 	
 	//Search By keyword testcases
@@ -50,8 +52,9 @@ public class ClassSearch_KeywordSearch {
 		home.keyword(subject);
 		home.performsearch();
 		
-		this.results=home.assertresults();
- 
+		prodHome.keyword(subject);
+		prodHome.performsearch();
+
 
 	}
 	
@@ -59,8 +62,10 @@ public class ClassSearch_KeywordSearch {
 	public void validate_3CharSearch_Subject(){
 		//Validate Subject Details and Instructor Details
 		val.validateSubjectName(validateString[0]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
-		//TODO: how to check subject is correct.	
+		val.verifyResultWithProd(prodDriver);
+		//MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		//TODO: how to check subject is correct.
+		prodDriver.quit();
 		driver.quit();
 	}
 	
@@ -68,8 +73,10 @@ public class ClassSearch_KeywordSearch {
 	@Then("^The Results must contain records with matching class title/topic title or instructor$")
 	public void validate_3CharSearch_ClassTitle(){
 		//Validate Subject Details and Instructor Details
-		val.validateClassTitleAndIns(validateString[0]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+//		val.validateClassTitleAndIns(validateString[0]);
+//		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		val.verifyResultWithProd(prodDriver);
+		prodDriver.quit();
 		driver.quit();
 	}
 
@@ -77,8 +84,12 @@ public class ClassSearch_KeywordSearch {
 	@Then("^The Results must contain records with correct subject and category number$")
 	public void validate_SubjectNumber(){
 		//Validate Subject Details and Instructor Details
-		val.validateSubjectName(validateString[0]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));	
+		//val.validateSubjectName(validateString[0]);
+		//MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));	
+		val.verifyResultWithProd(prodDriver);
+		//MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		//TODO: how to check subject is correct.
+		prodDriver.quit();
 		driver.quit();
 	}
 
@@ -86,16 +97,24 @@ public class ClassSearch_KeywordSearch {
 	@Then("^The Results must contain records that match the class number$")
 	public void validate_ClassNumber(){
 		//Validate Subject Details and Instructor Details
-		val.validateClassNumber(validateString[0]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));	
+		//val.validateClassNumber(validateString[0]);
+		//MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));	
+		val.verifyResultWithProd(prodDriver);
+		//MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		//TODO: how to check subject is correct.
+		prodDriver.quit();
 		driver.quit();
 	}
 	
 	@Then("^The Results must contain records that match the class number and ignores all other keywords$")
 	public void validate_ClassNumberIgnore(){
 		//Validate Subject Details and Instructor Details
-		val.validateClassNumber(validateString[0].split(" ")[1]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));	
+		//val.validateClassNumber(validateString[0].split(" ")[1]);
+		//MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));	
+		val.verifyResultWithProd(prodDriver);
+		//MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		//TODO: how to check subject is correct.
+		prodDriver.quit();
 		driver.quit();
 	}
 	
@@ -114,6 +133,11 @@ public class ClassSearch_KeywordSearch {
 		
 		val.verifyResultWithProd(driver2);
 		driver2.quit();
+		
+		val.verifyResultWithProd(prodDriver);
+		//MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+		//TODO: how to check subject is correct.
+		prodDriver.quit();
 		driver.quit();
 	}
 	

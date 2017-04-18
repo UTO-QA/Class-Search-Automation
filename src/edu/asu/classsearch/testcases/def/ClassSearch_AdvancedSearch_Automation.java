@@ -136,9 +136,9 @@ public class ClassSearch_AdvancedSearch_Automation {
 	
 	@Then("^The results should contain only classes with the given number of units$")
 	public void validate_NumofUnits(){
-		val.validateSubjectName(validateString[0]);
-		val.validateNumberOfUnits(validateString[1]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
+//		val.validateSubjectName(validateString[0]);
+//		val.validateNumberOfUnits(validateString[1]);
+//		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 		
 		val.verifyResultWithProd(prodDriver);
 
