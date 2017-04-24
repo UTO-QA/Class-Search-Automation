@@ -183,6 +183,18 @@ public class Classsearch_Elastic_Combination {
 
 				break;
 				
+			case PRO:
+                 adv.clickPromod();
+                 prodAdv.clickPromod();
+                 break;
+                 
+			case HON:
+	               adv.clickHonors();
+	               prodAdv.clickHonors();
+	               break;
+
+
+				
 			default:
 				break;
 			}
