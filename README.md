@@ -4,7 +4,7 @@ Introduction:<br>
 This is a Behavioural Driven Development model for automation. The Testcases are provided in <b>Feature Files</b>.<br>
 The feature files comprise of <br>
 Scenario <br>
-<t>Given <br>
+Given <br>
   When <br>
   Then <br>
 </p>
