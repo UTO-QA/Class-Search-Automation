@@ -18,8 +18,8 @@ Now Set the format variable to the locaiton where the reports are to be generate
 Run this using JUnit Configuration.
 
 Edit the following lines in the project's pom.xml
-<outputDirectory>C:/Users/_username_/Dropbox (ASU)/automation/Reports/cucumber-html-reports</outputDirectory>
-<cucumberOutput>CC:/Users/_username_/Dropbox (ASU)/automation/Reports/cucumber.json</cucumberOutput>
+&ltoutputDirectory&gtC:/Users/_username_/Dropbox (ASU)/automation/Reports/cucumber-html-reports&lt/outputDirectory&gt
+&ltcucumberOutput&gtC:/Users/_username_/Dropbox (ASU)/automation/Reports/cucumber.json&lt/cucumberOutput&gt
 </p>
 <p>
 Once the tests have been executed. Run the same file using mvn verify.<br>
