@@ -31,8 +31,8 @@
                         </goals>
                         <configuration>
                             <projectName>Class-Search Automation</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+                            <outputDirectory>C:/Users/udasu/Dropbox (ASU)/automation/Reports/cucumber-html-reports</outputDirectory>
+                            <cucumberOutput>C:/Users/udasu/Dropbox (ASU)/automation/Reports/cucumber.json</cucumberOutput>
                             <parallelTesting>false</parallelTesting>
                         </configuration>
                     </execution>
