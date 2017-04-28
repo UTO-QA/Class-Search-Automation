@@ -14,9 +14,11 @@ Usage:<br>
 Import the Class-Search Automation project and Open using Eclipse.<br>
 Navigate to /Class-Search Automation/src/edu/asu/classsearch/testrunner/ClassSearchTestsWithReport.java <br><br>
 Set the features variable to the feature file you want to execute. Eg. features="src/edu/asu/classearch/features/test.feature".<br>
+Now Set the format variable to the locaiton where the reports are to be generated. Eg. format = { "pretty","json:C:/Users/_username_/Dropbox (ASU)/automation/Reports/cucumber.json" <br>
 Run this using JUnit Configuration.
 </p>
 <p>
 Once the tests have been executed. Run the same file using mvn verify.<br>
+
 The results are located at /Class-Search Automation/target/cucumber-html-reports/cucumber-html-reports
 </p>
