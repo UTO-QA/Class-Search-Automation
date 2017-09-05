@@ -1,7 +1,5 @@
 package edu.asu.classsearch.testcases.def;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -9,29 +7,28 @@ import cucumber.api.java.en.When;
 import edu.asu.classsearch.pages.ClassSearch_AdvancedSearch;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
 import edu.asu.classsearch.pages.classearch_commons;
-import edu.asu.classsearch.input.get_Input;
-import edu.asu.classsearch.pages.ClassSearchResults_Validator;;
+import edu.asu.classsearch.input.ClassSearchInputOLD;
+import edu.asu.classsearch.pages.ClassSearchResultsValidator;;
 
-public class ClassSearch_AdvancedSearch_Automation {
+public class ClassSearchAdvancedSearchAutomation {
 	
-	private ClassSearchResults_Validator val;
+	private ClassSearchResultsValidator val;
 	private WebDriver driver;
 	private ClassSearch_AdvancedSearch adv;
 	private classearch_HomePage_Methods home;
 	private String validateString[];
-	private String results="";
 	
 	private WebDriver prodDriver;
 	private ClassSearch_AdvancedSearch prodAdv;
 	private classearch_HomePage_Methods prodHome;
 
-	//creates a connection
+	//Creates a connection
 	@Given("^The user is on Class Search page Advanced Search$")
 	public void getconnection(){
 		driver=classearch_commons.getconn("https://webapp4-dev.asu.edu/elastic-catalog/");
 		
 		adv=new ClassSearch_AdvancedSearch(driver);
-		val=new ClassSearchResults_Validator(driver);
+		val=new ClassSearchResultsValidator(driver);
 		home=new classearch_HomePage_Methods(driver);
 		
 		prodDriver=classearch_commons.getconn("https://webapp4-dev.asu.edu/catalog/");
@@ -43,7 +40,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 	@When("^User performs a search using the correct Subject and Instructor$")
 	public void positive_Subject_Instructor(){
 
-		String []values=get_Input.inputload("TC_22").split(",");
+		String []values=ClassSearchInputOLD.inputload("TC_22").split(",");
 		String subject=values[0];
 		String instructor=values[1];
 		validateString=new String[2];
@@ -54,9 +51,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		adv.clickAdvancedSearch();
 		adv.enterInstructorName(instructor);
 		home.performsearch();
-		
-		this.results=home.assertresults();
-	  
+			  
 		prodHome.subject(subject);
 		prodAdv.clickAdvancedSearch();
 		prodAdv.enterInstructorName(instructor);
@@ -67,10 +62,8 @@ public class ClassSearch_AdvancedSearch_Automation {
 	@Then("^The Results with correct subject info and Instructor should be Displayed$")
 	public void validate_Subject_Instructor(){
 		//Validate Subject Details and Instructor Details
-		val.validateSubjectName(validateString[0]);
-		//val.validateInstructorName(validateString[1]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
-						  
+		val.validateSubjectNumber(validateString[0]);
+		//val.validateInstructorName(validateString[1]);						  
 		val.verifyResultWithProd(prodDriver);
 
 		driver.quit();
@@ -80,7 +73,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 	
 	@When("^User performs a search using a college/school$")
 	public void positive_CollegeSchool(){
-		String values[]=get_Input.inputload("TC_23").split(",");
+		String values[]=ClassSearchInputOLD.inputload("TC_23").split(",");
 		String college=values[0];
 		validateString=new String[1];
 		validateString[0]=college;
@@ -88,9 +81,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		adv.clickAdvancedSearch();
 		adv.selectCollegeSchool(college);
 		home.performsearch();
-		
-		this.results=home.assertresults();
-		
+				
 		//Verification URL
 		prodAdv.clickAdvancedSearch();
 		prodAdv.selectCollegeSchool(college);
@@ -102,9 +93,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 	
 	@Then("^The results should contain records with the selected college/school$")
 	public void validate_CollegeSchool(){
-		//TODO: See if there is a way to validate collegeSchool
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
-		
+
 		val.verifyResultWithProd(prodDriver);
 
 		driver.quit();
@@ -113,7 +102,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 
 	@When("^User selects # of Units and subject and performs search$")
 	public void positive_NumofUnits(){
-		String values[]=get_Input.inputload("TC_24").split(",");
+		String values[]=ClassSearchInputOLD.inputload("TC_24").split(",");
 		String subject=values[0];
 		String numUnits=values[1];
 		validateString=new String[2];
@@ -129,9 +118,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		prodAdv.clickAdvancedSearch();
 		prodAdv.selectNumberofUnits(numUnits);
 		prodHome.performsearch();
-		
-		this.results=home.assertresults();
-		
+				
 	}
 	
 	@Then("^The results should contain only classes with the given number of units$")
@@ -148,7 +135,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 	
 	@When("^User selects Class # and subject and performs search$")
 	public void positive_ClassNumber(){
-		String values[]=get_Input.inputload("TC_25").split(",");
+		String values[]=ClassSearchInputOLD.inputload("TC_25").split(",");
 		String subject=values[0];
 		String classNum=values[1];
 		validateString=new String[2];
@@ -165,16 +152,13 @@ public class ClassSearch_AdvancedSearch_Automation {
 		prodAdv.enterClassNumber(classNum);
 		prodHome.performsearch();
 		
-		
-		this.results=home.assertresults();
-		
+				
 	}
 	
 	@Then("^The results should contain only classes with that class number$")
 	public void validate_ClassNumber(){
-		val.validateSubjectName(validateString[0]);
+		val.validateSubjectNumber(validateString[0]);
 		val.validateClassNumber(validateString[1]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 		
 		val.verifyResultWithProd(prodDriver);
 
@@ -184,7 +168,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 	
 	@When("^User enters Start Date and subject and performs search$")
 	public void positive_StartDate(){
-		String values[]=get_Input.inputload("TC_26").split(",");
+		String values[]=ClassSearchInputOLD.inputload("TC_26").split(",");
 		String subject=values[0];
 		String startDate=values[1];
 		validateString=new String[2];
@@ -200,17 +184,14 @@ public class ClassSearch_AdvancedSearch_Automation {
 		prodAdv.clickAdvancedSearch();
 		prodAdv.enterStartDate(startDate);
 		prodHome.performsearch();
-		
-		this.results=home.assertresults();
-		
+				
 	}
 	
 	@Then("^The results should contain only classes only classes starting on or after the date should return$")
 	public void validate_StartDate(){
 
-		val.validateSubjectName(validateString[0]);
+		val.validateSubjectNumber(validateString[0]);
 		val.validateStartDate(validateString[1]);
-		MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 		val.verifyResultWithProd(prodDriver);
 		driver.quit();
 		prodDriver.quit();
@@ -219,7 +200,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 	//27: User Enters correct subject and End Date 
 		@When("^User performs a search using the correct Subject and End Date$")
 		public void Postive_EndDate(){
-			String []values=get_Input.inputload("TC_27").split(",");
+			String []values=ClassSearchInputOLD.inputload("TC_27").split(",");
 			String subject=values[0];
 			String endDate=values[1];
 			validateString=new String[2];
@@ -237,15 +218,12 @@ public class ClassSearch_AdvancedSearch_Automation {
 			prodHome.performsearch();
 		  
 			
-			this.results=home.assertresults();
-
 		}
 		@Then("^The Results must display only classes ending on or after the date$")
 		public void validate_EndDate(){
 			//Validate Subject Details and Instructor Details
-			val.validateSubjectName(validateString[0]);
+			val.validateSubjectNumber(validateString[0]);
 			val.validateEndDate(validateString[1]);
-			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			
 			val.verifyResultWithProd(prodDriver);
 
@@ -257,7 +235,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		//28: User Enters correct subject and checks Honors 
 		@When("^User performs a search using the correct Subject and checks Honors check box$")
 		public void positive_Honors(){
-			String []values=get_Input.inputload("TC_28").split(",");
+			String []values=ClassSearchInputOLD.inputload("TC_28").split(",");
 			String subject=values[0];
 			validateString=new String[1];
 			validateString[0]=subject;
@@ -271,17 +249,14 @@ public class ClassSearch_AdvancedSearch_Automation {
 			prodAdv.clickAdvancedSearch();
 			prodAdv.clickHonors();
 			prodHome.performsearch();
-			
-			this.results=home.assertresults();
 
 		}
 		
 		@Then("^The Results must display only honors classes or classes that offer honors enrichment contracts$")
 		public void validate_Honors(){
 			//Validate Subject Details and Instructor Details
-			val.validateSubjectName(validateString[0]);
+			val.validateSubjectNumber(validateString[0]);
 			val.validateHonorsTitle();
-			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			
 			val.verifyResultWithProd(prodDriver);
 
@@ -293,7 +268,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		//29: User Enters correct subject and checks Promod 
 		@When("^User performs a search using the correct Subject and checks Project-based check box$")
 		public void positive_Promod(){
-			String []values=get_Input.inputload("TC_29").split(",");
+			String []values=ClassSearchInputOLD.inputload("TC_29").split(",");
 			String subject=values[0];
 			validateString=new String[1];
 			validateString[0]=subject;
@@ -308,15 +283,13 @@ public class ClassSearch_AdvancedSearch_Automation {
 			prodAdv.clickPromod();
 			prodHome.performsearch();
 		  
-			this.results=home.assertresults();
 
 		}
 		@Then("^The Results must display only Promod block classes or individual classes designated as project based with a special note 0018$")
 		public void validate_promod(){
 			//Validate Subject Details and Instructor Details
-			val.validateSubjectName(validateString[0]);
+			val.validateSubjectNumber(validateString[0]);
 			val.validatePromod();
-			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			
 			val.verifyResultWithProd(prodDriver);
 
@@ -328,7 +301,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		//30: User Searches using General studies 
 		@When("^User performs a search using General Studies option$")
 		public void positive_GeneralStudies(){
-			String []values=get_Input.inputload("TC_30").split("&");
+			String []values=ClassSearchInputOLD.inputload("TC_30").split("&");
 			String gs=values[0];
 			validateString=values;
 			adv.clickAdvancedSearch();
@@ -361,7 +334,6 @@ public class ClassSearch_AdvancedSearch_Automation {
 			
 			prodHome.performsearch();
 		  
-		  this.results=home.assertresults();
 
 		}
 		
@@ -369,7 +341,6 @@ public class ClassSearch_AdvancedSearch_Automation {
 		public void validate_GeneralStudies(){
 			//Validate Subject Details and Instructor Details
 			val.validateGeneralStudies(validateString);
-			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			
 			val.verifyResultWithProd(prodDriver);
 
@@ -381,7 +352,7 @@ public class ClassSearch_AdvancedSearch_Automation {
 		//31: User Enters correct subject and level 
 		@When("^User performs a search using Subject and Level$")
 		public void positive_Level(){
-			String []values=get_Input.inputload("TC_31").split(",");
+			String []values=ClassSearchInputOLD.inputload("TC_31").split(",");
 			String subject=values[0];
 			String level=values[1];
 			validateString=new String[2];
@@ -398,15 +369,13 @@ public class ClassSearch_AdvancedSearch_Automation {
 			prodAdv.selectLevel(level);
 			prodHome.performsearch();
 			
-		  this.results=home.assertresults();
 
 		}
 		@Then("^The Results must display only classes in the level or division chosen$")
 		public void validate_Level(){
 			//Validate Subject Details and Instructor Details
-			val.validateSubjectName(validateString[0]);
+			val.validateSubjectNumber(validateString[0]);
 			//TODO: Validate Level
-			MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 			
 			val.verifyResultWithProd(prodDriver);
 

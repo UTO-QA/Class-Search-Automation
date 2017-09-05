@@ -14,8 +14,8 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import edu.asu.classsearch.input.get_Input;
-import edu.asu.classsearch.pages.ClassSearchResults_Validator;
+import edu.asu.classsearch.input.ClassSearchInputOLD;
+import edu.asu.classsearch.pages.ClassSearchResultsValidator;
 import edu.asu.classsearch.pages.ClassSearch_AdvancedSearch;
 import edu.asu.classsearch.pages.ClassSearch_Filters;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
@@ -32,7 +32,7 @@ public class Classsearch_Elastic_Combination {
 	classearch_HomePage_Methods home;
 	classearch_HomePage_Methods prodHome;
 	
-	ClassSearchResults_Validator val;
+	ClassSearchResultsValidator val;
 	
 	ClassSearch_Filters filters;
 	ClassSearch_Filters prodFilters;
@@ -62,7 +62,7 @@ public class Classsearch_Elastic_Combination {
 		adv=new ClassSearch_AdvancedSearch(driver);
 		prodAdv=new ClassSearch_AdvancedSearch(prodDriver);
 		
-		val=new ClassSearchResults_Validator(driver);
+		val=new ClassSearchResultsValidator(driver);
 		
 		filters=new ClassSearch_Filters(driver);
 		prodFilters=new ClassSearch_Filters(prodDriver);
@@ -71,7 +71,7 @@ public class Classsearch_Elastic_Combination {
 	@When("^User performs a search using any combination of fields$")
 	public void elastic_Combination_When(){
 		
-		String []inputs=get_Input.inputload(testCase).split(",");
+		String []inputs=ClassSearchInputOLD.inputload(testCase).split(",");
 		adv.clickAdvancedSearch();
 		prodAdv.clickAdvancedSearch();
 		for(int i=0;i<inputs.length;i++){

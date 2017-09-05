@@ -13,12 +13,12 @@ public class ClassSearch_Driver {
 	}
 	
 	public static WebDriver getInstance(){
-		ClassSearch_Driver cd=new ClassSearch_Driver();
+		ClassSearch_Driver cd = new ClassSearch_Driver();
 		return driver;
 	} 
 	
 	public static WebDriver getProdInstance(){
-		ClassSearch_Driver cd=new ClassSearch_Driver();
+		ClassSearch_Driver cd = new ClassSearch_Driver();
 		return prodDriver;
 	} 
 }

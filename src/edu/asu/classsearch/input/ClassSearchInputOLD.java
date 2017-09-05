@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class get_Input {
+public class ClassSearchInputOLD {
 	
-	public static  String inputload(String key){
+	public static String inputload(String key){
  	Properties prop = new Properties();
 	InputStream input = null;
 	String value=",";

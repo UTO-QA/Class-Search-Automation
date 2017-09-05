@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import edu.asu.classsearch.input.get_Input;
+import edu.asu.classsearch.input.ClassSearchInputOLD;
 
 public class Loginpage {
 	//property username
@@ -41,7 +41,7 @@ public class Loginpage {
 		Scanner sc=new Scanner(System.in);
 		WebElement username=property_username();
 		final WebElement password=property_password();
-		get_Input login=new get_Input();
+		ClassSearchInputOLD login=new ClassSearchInputOLD();
 		String cred[]=login.login().split(",");
 		username.sendKeys(cred[0]);
 		password.sendKeys(cred[1]);

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
 import edu.asu.classsearch.pages.classearch_commons;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class classearch_regression {
 private classearch_HomePage_Methods cl;

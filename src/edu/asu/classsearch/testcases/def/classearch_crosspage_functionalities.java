@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import edu.asu.classsearch.input.get_Input;
+import edu.asu.classsearch.input.ClassSearchInputOLD;
 import edu.asu.classsearch.pages.*;
 
 public class classearch_crosspage_functionalities {
@@ -32,7 +32,7 @@ public class classearch_crosspage_functionalities {
 			return;
 	}
 	public  void add(String Testcase){
-		String []values=get_Input.inputload(Testcase).split(",");
+		String []values=ClassSearchInputOLD.inputload(Testcase).split(",");
 		String openorall=values[0];
 		String course=values[1];
 		String number=values[2];
@@ -70,7 +70,7 @@ public class classearch_crosspage_functionalities {
 	//TC_20 
 	@When("^A user swaps a class from class catalog$")
 	public void swap(){
-		String []values=get_Input.inputload("TC_20").split(",");
+		String []values=ClassSearchInputOLD.inputload("TC_20").split(",");
 		String action=values[0];
 		String coursenumber=values[1];
 		cl=new classearch_HomePage_Methods(driver);

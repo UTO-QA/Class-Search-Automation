@@ -12,8 +12,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import edu.asu.classsearch.input.get_Input;
-import edu.asu.classsearch.pages.ClassSearchResults_Validator;
+import edu.asu.classsearch.input.ClassSearchInputOLD;
+import edu.asu.classsearch.pages.ClassSearchResultsValidator;
 import edu.asu.classsearch.pages.ClassSearch_AdvancedSearch;
 import edu.asu.classsearch.pages.ClassSearch_Filters;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
@@ -21,7 +21,7 @@ import edu.asu.classsearch.pages.classearch_commons;
 
 public class ClassSearch_Filters_Automation {
 	
-	private ClassSearchResults_Validator val;
+	private ClassSearchResultsValidator val;
 	private WebDriver driver;
 	private classearch_HomePage_Methods home;
 	private classearch_HomePage_Methods prodHome;
@@ -46,7 +46,7 @@ public class ClassSearch_Filters_Automation {
 		driver=classearch_commons.getconn("https://webapp4-dev.asu.edu/elastic-catalog/");
 		prodDriver=classearch_commons.getconn("https://webapp4-dev.asu.edu/catalog/");
 		
-		val=new ClassSearchResults_Validator(driver);
+		val=new ClassSearchResultsValidator(driver);
 		home=new classearch_HomePage_Methods(driver);
 		adv=new ClassSearch_AdvancedSearch(driver);
 		filters=new ClassSearch_Filters(driver);
@@ -59,7 +59,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_43
 	@When("^User toggles the In-Person & iCourses/ASU Online Classes toggle to ASU Online Classes$")
 	public void filters_ASUOnline(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String searchterm=values[0];
 		String number=values[1];
 		home.subjectandnumber(searchterm,number);
@@ -97,7 +97,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_44
 	@When("^User performs a search with default filters\\(Open Classes\\)$")
 	public void filters_OpenClasses(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String searchterm=values[0];
 		String number=values[1];
 		home.subjectandnumber(searchterm,number);
@@ -133,7 +133,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_45
 	@When("^User performs a search with different combination of session filters$")
 	public void filters_Session(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String searchterm=values[0];
 		home.subject(searchterm);
 		home.performsearch();
@@ -174,7 +174,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_46
 	@When("^User performs a search with School and Level and applies Filters$")
 	public void filters_School_Level_Location(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String school=values[0];
 		String level=values[1];
 		adv.clickAdvancedSearch();
@@ -191,7 +191,7 @@ public class ClassSearch_Filters_Automation {
 	@Then("^The Results should return for filters Polytechnic, Tempe, West, iCourse and Off-Campus and combinations matching filters, other locations do not return results$")
 	public void verify_School_Level_Location(){
 		//String results=subject_number();
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String []locations=Arrays.copyOfRange(values, 2, values.length);
 		List<String> locationSubset=new ArrayList<String>();
 		int n=locations.length;
@@ -220,7 +220,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_47
 	@When("^User performs a search with subject and filter by Thunderbird$")
 	public void filters_Location_TBD(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String subject=values[0];
 		home.subject(subject);
 		home.performsearch();
@@ -261,7 +261,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_48
 	@When("^User performs a search with subject and applies Location filter$")
 	public void filters_subject_Location(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String subject=values[0];
 		home.subject(subject);
 		home.performsearch();
@@ -273,7 +273,7 @@ public class ClassSearch_Filters_Automation {
 	@Then("^Results should return for locations matching the filter other locations do not return results$")
 	public void verify_subject_Location(){
 		//String results=subject_number();
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String []locations=Arrays.copyOfRange(values, 1, values.length);
 		List<String> locationSubset=new ArrayList<String>();
 		int n=locations.length;
@@ -302,7 +302,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_49
 	@When("^User performs a search with college/school and applies Location filter$")
 	public void filters_College_Location(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String school=values[0];
 		adv.clickAdvancedSearch();
 		adv.selectCollegeSchool(school);
@@ -317,7 +317,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_50
 	@When("^User performs a search with School and applies Days filter$")
 	public void filters_School_Days(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String college=values[0];
 		adv.clickAdvancedSearch();
 		adv.selectCollegeSchool(college);
@@ -331,7 +331,7 @@ public class ClassSearch_Filters_Automation {
 	@Then("^Results should return any class with any day in the filter set$")
 	public void verify_School_Days(){
 		//String results=subject_number();
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String []days=Arrays.copyOfRange(values, 1, values.length);
 		List<String> daySubset=new ArrayList<String>();
 		filters.expandDaysFilter();
@@ -365,7 +365,7 @@ public class ClassSearch_Filters_Automation {
 	//TC_51
 	@When("^User performs a search with Subject and applies Time Filter$")
 	public void filters_Subject_Time(){
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String subject=values[0];
 		home.subject(subject);
 		prodHome.subject(subject);
@@ -377,7 +377,7 @@ public class ClassSearch_Filters_Automation {
 	@Then("^All classes returned should start after the start time and end before end time$")
 	public void verify_Subject_Time(){
 		//String results=subject_number();
-		String []values=get_Input.inputload(testCase).split(",");
+		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String startTime=values[1];
 		String endTime="";
 		

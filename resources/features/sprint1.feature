@@ -34,11 +34,12 @@ Feature: Class Search verify Subject,Number and keyword
 		Given The user is on Class Search page 
 		When User enters incorrect Number
 		Then  A Warning should be Displayed for incorrect number scenario
-		
-	Scenario: TC_8 Verify the user is able to perform the search succesfully using a correct  keyword 
-		Given The user is on Class Search page 
-		When  User performs a search using only the correct keyword
-		Then  The search results page is displayed for correct keyword scenario
+
+#	Outdated scenario. Covered in Keyword search part.		
+#	Scenario: TC_8 Verify the user is able to perform the search succesfully using a correct  keyword 
+#		Given The user is on Class Search page 
+#		When  User performs a search using only the correct keyword
+#		Then  The search results page is displayed for correct keyword scenario
 		
 		
 	Scenario: TC_9 Verify that search with only incorrect keyword produces proper warning message

@@ -1,6 +1,7 @@
 package edu.asu.classsearch.pages;
 
 import java.util.List;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,7 +121,11 @@ public class ClassSearch_Filters {
 	}
 	
 	public void filterBySession(List<String> sessions){
-		
+		//Handle new Elastic Search changes.
+		List<WebElement> elasticSessionWrapper = this.driver.findElements(By.xpath("//*[@id='session-button']"));
+		if(!elasticSessionWrapper.isEmpty()) {
+			elasticSessionWrapper.get(0).click();
+		}
 		unCheckSessions();
 		for(String s:sessions){
 			WebElement elem=sessionFilter(s);			
@@ -129,12 +134,7 @@ public class ClassSearch_Filters {
 	}
 	
 	public void filterBySession(String[] sessions){
-		
-		unCheckSessions();
-		for(String s:sessions){
-			WebElement elem=sessionFilter(s);			
-			elem.click();	
-		}
+		filterBySession(Arrays.asList(sessions));
 	}
 	
 	/*
