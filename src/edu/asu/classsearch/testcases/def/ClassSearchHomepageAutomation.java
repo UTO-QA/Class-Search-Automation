@@ -1,7 +1,12 @@
 package edu.asu.classsearch.testcases.def;
 
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,9 +26,20 @@ public class ClassSearchHomepageAutomation {
 	// New Class to Validate Search Results
 	private ClassSearchResultsValidator val;
 	private String validateString = "";
-	
+
 	private ClassSearch_Filters filters;
 
+/*	@After
+	public void killBrowser(Scenario scenario) {
+		if (scenario.isFailed()) {
+			String scenarioName = scenario.getName();
+			String screenShotName = scenarioName.substring(0, scenarioName.indexOf(" ")) + "jpg";
+			scenario.embed(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), screenShotName);
+			driver.quit();
+		}
+		
+	}
+*/
 	// creates a connection
 	@Given("^The user is on Class Search page$")
 	public void getconnection() {
@@ -270,7 +286,8 @@ public class ClassSearchHomepageAutomation {
 		closeconnection();
 	}
 
-	// TEST 14: Verify that the results displayed contain only campus classes when in-Person is selected
+	// TEST 14: Verify that the results displayed contain only campus classes when
+	// in-Person is selected
 	@When("^User selects for in-person and performs a search$")
 	public void toggleradio_campus() {
 		String[] values = ClassSearchInputOLD.inputload("TC_14").split(",");
@@ -291,7 +308,8 @@ public class ClassSearchHomepageAutomation {
 		closeconnection();
 	}
 
-	// TEST 15: Verify that the results displayed contain only ASUONLINE classes when online is selected
+	// TEST 15: Verify that the results displayed contain only ASUONLINE classes
+	// when online is selected
 	@When("^User selects for online and performs a search$")
 	public void toggleradio_online() {
 		String[] values = ClassSearchInputOLD.inputload("TC_15").split(",");
@@ -326,7 +344,7 @@ public class ClassSearchHomepageAutomation {
 		classSearchHomePageMethods.subject(subject);
 		classSearchHomePageMethods.check_ifopenorall(openorall);
 		classSearchHomePageMethods.performsearch();
-		this.filters.filterBySession(new String[] {session});
+		this.filters.filterBySession(new String[] { session });
 		this.result = session;
 	}
 
@@ -350,7 +368,7 @@ public class ClassSearchHomepageAutomation {
 		classSearchHomePageMethods.subject(subject);
 		classSearchHomePageMethods.check_ifopenorall(openorall);
 		classSearchHomePageMethods.performsearch();
-		this.filters.filterBySession(new String[] {session});
+		this.filters.filterBySession(new String[] { session });
 		this.result = session;
 
 	}
@@ -375,7 +393,7 @@ public class ClassSearchHomepageAutomation {
 		classSearchHomePageMethods.subject(subject);
 		classSearchHomePageMethods.check_ifopenorall(openorall);
 		classSearchHomePageMethods.performsearch();
-		this.filters.filterBySession(new String[] {session});
+		this.filters.filterBySession(new String[] { session });
 		this.result = session;
 
 	}

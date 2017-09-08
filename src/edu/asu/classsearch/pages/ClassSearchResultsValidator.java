@@ -249,8 +249,8 @@ public class ClassSearchResultsValidator {
 
 			for (int i = 0; i < wList1.size(); i++) {
 				// System.out.println(wList1.get(i).getText()+"-"+wList2.get(i).getText());
-				MatcherAssert.assertThat(wList1.get(i).getText().trim(),
-						CoreMatchers.equalTo((wList2.get(i).getText()).trim()));
+				MatcherAssert.assertThat(wList2.get(i).getText().trim(),
+						CoreMatchers.containsString((wList1.get(i).getText()).trim()));
 			}
 
 		}
@@ -298,14 +298,13 @@ public class ClassSearchResultsValidator {
 	}
 	
 	public void validateSeatStatus(String status) {
+		
+		if("all".equalsIgnoreCase(status)) Assert.assertTrue(true);
 		boolean openAssert = fetchOpenSeatStatus();
 		if("open".equalsIgnoreCase(status)) {
-			Assert.assertTrue(openAssert);
+			Assert.assertEquals("Expected all Open classes but found Closed classes", true, openAssert); 
 			
-		} else if("all".equalsIgnoreCase(status)){
-			Assert.assertFalse(openAssert);
 		}
-		
 	}
 
 }
