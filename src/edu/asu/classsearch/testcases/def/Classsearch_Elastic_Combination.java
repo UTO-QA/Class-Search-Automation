@@ -1,8 +1,13 @@
 package edu.asu.classsearch.testcases.def;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.Before;
@@ -154,11 +159,16 @@ public class Classsearch_Elastic_Combination {
 			
 			case DAY:
 				String days[]=Arrays.copyOfRange(values,1,values.length);
+				List<String> dayss = Arrays.asList(days);
 				
-				filters.expandDaysFilter();
+				//To click the days button so that the days filter options becomes visible
+				List<WebElement> elasticSessionWrapper = this.driver.findElements(By.xpath("//*[@id='days-button']"));
+				if(!elasticSessionWrapper.isEmpty()) {
+					elasticSessionWrapper.get(0).click(); }
+				//filters.expandDaysFilter();
 				prodFilters.expandDaysFilter();
 				
-				filters.filterByDaysOfWeek(days);
+				filters.filterByDaysOfWeek(dayss);
 				prodFilters.filterByDaysOfWeek(days);
 				break;
 				
@@ -167,7 +177,7 @@ public class Classsearch_Elastic_Combination {
 				String endTime="";
 				if(values.length>2) endTime=values[2];
 				
-				filters.expandTimeFilter();
+				//filters.expandTimeFilter();
 				prodFilters.expandTimeFilter();
 				
 				filters.enterStartTime(startTime);
@@ -175,6 +185,13 @@ public class Classsearch_Elastic_Combination {
 
 				prodFilters.enterStartTime(startTime);
 				prodFilters.enterEndTime(endTime);
+				prodFilters.enterEndTime(endTime);
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				break;
 				

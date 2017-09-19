@@ -230,6 +230,12 @@ public class ClassSearch_Filters_Automation {
 			
 			filters.filterByLocation(locationSubset);
 			prodFilters.filterByLocation(locationSubset);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			val.verifyResultWithProd(prodDriver);
 		}
 		
@@ -323,6 +329,14 @@ public class ClassSearch_Filters_Automation {
 			//System.out.println();
 			filters.filterByLocation(locationSubset);
 			prodFilters.filterByLocation(locationSubset);
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			val.verifyResultWithProd(prodDriver);
 		}
 		
