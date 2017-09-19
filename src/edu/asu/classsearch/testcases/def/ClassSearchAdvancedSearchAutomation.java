@@ -1,6 +1,11 @@
 package edu.asu.classsearch.testcases.def;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,7 +26,7 @@ public class ClassSearchAdvancedSearchAutomation {
 	private WebDriver prodDriver;
 	private ClassSearch_AdvancedSearch prodAdv;
 	private classearch_HomePage_Methods prodHome;
-
+	
 	//Creates a connection
 	@Given("^The user is on Class Search page Advanced Search$")
 	public void getconnection(){

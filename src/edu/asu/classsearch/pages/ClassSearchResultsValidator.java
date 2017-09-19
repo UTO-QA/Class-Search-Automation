@@ -298,14 +298,13 @@ public class ClassSearchResultsValidator {
 	}
 	
 	public void validateSeatStatus(String status) {
+		
+		if("all".equalsIgnoreCase(status)) Assert.assertTrue(true);
 		boolean openAssert = fetchOpenSeatStatus();
 		if("open".equalsIgnoreCase(status)) {
-			Assert.assertTrue(openAssert);
+			Assert.assertEquals("Expected all Open classes but found Closed classes", true, openAssert); 
 			
-		} else if("all".equalsIgnoreCase(status)){
-			Assert.assertFalse(openAssert);
 		}
-		
 	}
 
 }

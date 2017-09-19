@@ -3,7 +3,6 @@ package edu.asu.classearch.driver;
 import org.openqa.selenium.WebDriver;
 
 import edu.asu.classsearch.pages.classearch_commons;
-import mx4j.tools.config.DefaultConfigurationBuilder.New;
 
 public class ClassSearch_Driver {
 	private  static final WebDriver driver=classearch_commons.getconn("https://webapp4-dev.asu.edu/elastic-catalog/");

@@ -1,13 +1,8 @@
 package edu.asu.classsearch.testcases.def;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import java.util.Arrays;
 import org.openqa.selenium.WebDriver;
-
-import com.beust.jcommander.internal.Lists;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.Before;

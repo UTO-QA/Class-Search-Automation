@@ -1,7 +1,5 @@
 package edu.asu.classsearch.testcases.def;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
 
 import cucumber.api.Scenario;
@@ -11,7 +9,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import edu.asu.classsearch.input.ClassSearchInputOLD;
 import edu.asu.classsearch.pages.ClassSearchResultsValidator;
-import edu.asu.classsearch.pages.ClassSearch_AdvancedSearch;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
 import edu.asu.classsearch.pages.classearch_commons;
 
