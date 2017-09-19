@@ -46,7 +46,6 @@ public class ClassSearchResultsValidator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void validateClassNumber(String classNumber) {
@@ -242,6 +241,7 @@ public class ClassSearchResultsValidator {
 		tableColumnIDList.addAll(Arrays.asList("subjectNumberColumnValue"));
 		System.out.println("Starting to compare the results");
 		for (String td : tableColumnIDList) {
+			
 			List<WebElement> wList1 = this.driver.findElements(By.className(td));
 			List<WebElement> wList2 = prodDriver.findElements(By.className(td));
 

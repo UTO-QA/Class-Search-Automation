@@ -25,8 +25,21 @@ public class ClassSearch_Filters {
 		put("Eastern AZ College","//*[@id='EAC']");
 		put("Tucson",			 "//*[@id='TUCSON']");
 		put("iCourse (online)",  "//*[@id='ICOURSE']");
-		put("Off-campus",		 "//*[@id='OFFCAMP']");
-		put("All locations",	 "//*[@id='ALL']");
+		put("Off-Campus",		 "//*[@id='OFFCAMP']");
+//		put("All locations",	 "//*[@id='ALL']");
+	}};
+	
+	//Location and corresponding xPaths
+	//	String []days={"M","T","W","Th","F","S","Su"};
+	static final Map<String,String> elasticDays=new HashMap<String,String>()
+	{{
+		put("M", 		 "MON");
+		put("T",		 "TUES");
+		put("W",			 "WED");
+		put("Th",		 "THURS");
+		put("F",				 "FRI");
+		put("S","SAT");
+		put("Su","SUN");
 	}};
 	
 	
@@ -35,12 +48,12 @@ public class ClassSearch_Filters {
 	}
 	
 	private WebElement inPerson(){
-		WebElement elem=this.driver.findElement(By.xpath("//*[@id='typeSelectionCampus']"));
+		WebElement elem=this.driver.findElement(By.xpath("//*[@id='typeSelectionCampus' or @id='radio-campus']"));
 		return elem;
 	}
 
 	private WebElement online(){
-		WebElement elem=this.driver.findElement(By.xpath("//*[@id='typeSelectionOnline']"));
+		WebElement elem=this.driver.findElement(By.xpath("//*[@id='typeSelectionOnline' or @id='radio-online']"));
 		return elem;
 	}
 	
@@ -63,6 +76,11 @@ public class ClassSearch_Filters {
 	
 	private WebElement locationFilter(String location){
 		WebElement elem=this.driver.findElement(By.xpath(location));
+		return elem;
+	}
+	
+	private WebElement dayOfWeek(String day,String elasticDay){
+		WebElement elem=this.driver.findElement(By.xpath("//*[@id='day"+day+"' or @id='"+elasticDay+"']"));
 		return elem;
 	}
 	
@@ -120,20 +138,21 @@ public class ClassSearch_Filters {
 		}
 	}
 	
-	public void filterBySession(List<String> sessions){
+	public void filterBySession(List<String> sessions) throws Exception{
 		//Handle new Elastic Search changes.
-		List<WebElement> elasticSessionWrapper = this.driver.findElements(By.xpath("//*[@id='session-button']"));
+		/*List<WebElement> elasticSessionWrapper = this.driver.findElements(By.xpath("//*[@id='session-button']"));
 		if(!elasticSessionWrapper.isEmpty()) {
 			elasticSessionWrapper.get(0).click();
-		}
+		}*/
 		unCheckSessions();
 		for(String s:sessions){
-			WebElement elem=sessionFilter(s);			
+			Thread.sleep(1000);
+			WebElement elem=sessionFilter(s);
 			elem.click();	
 		}
 	}
 	
-	public void filterBySession(String[] sessions){
+	public void filterBySession(String[] sessions) throws Exception{
 		filterBySession(Arrays.asList(sessions));
 	}
 	
@@ -184,7 +203,7 @@ public class ClassSearch_Filters {
 	private void uncheckDays(){
 		String []days={"M","T","W","Th","F","S","Su"};
 		for(String d:days){
-			WebElement elem=dayOfWeek(d);
+			WebElement elem=dayOfWeek(d,elasticDays.get(d));
 			if(elem.isSelected()){
 				elem.click();
 			}
@@ -195,7 +214,7 @@ public class ClassSearch_Filters {
 		
 		uncheckDays();
 		for(String d:days){
-			WebElement elem=dayOfWeek(d);
+			WebElement elem=dayOfWeek(d,elasticDays.get(d));
 			elem.click();
 		}
 	}

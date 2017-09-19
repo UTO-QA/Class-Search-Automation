@@ -332,7 +332,7 @@ public class ClassSearchHomepageAutomation {
 
 	// TEST 16:
 	@When("^User selects Session A and performs a search$")
-	public void Session_A() {
+	public void Session_A() throws Exception {
 		String[] values = ClassSearchInputOLD.inputload("TC_16").split(",");
 		String campus = values[0];
 		String sem = values[1];
@@ -356,7 +356,7 @@ public class ClassSearchHomepageAutomation {
 	}
 
 	@When("^User selects Session B and performs a search$")
-	public void Session_B() {
+	public void Session_B()  throws Exception  {
 		String[] values = ClassSearchInputOLD.inputload("TC_16").split(",");
 		String campus = values[0];
 		String sem = values[1];
@@ -381,7 +381,7 @@ public class ClassSearchHomepageAutomation {
 	}
 
 	@When("^User selects Session C and performs a search$")
-	public void Session_C() {
+	public void Session_C()  throws Exception  {
 		String[] values = ClassSearchInputOLD.inputload("TC_16").split(",");
 		String campus = values[0];
 		String sem = values[1];

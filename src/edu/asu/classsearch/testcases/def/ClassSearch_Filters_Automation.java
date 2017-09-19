@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.Before;
@@ -121,10 +125,9 @@ public class ClassSearch_Filters_Automation {
 	}
 	
 	@And("^All classes full and open should display$")
-	public void verify_AllClasses(){
-		//String results=subject_number();
+	public void verify_AllClasses() throws Exception{
+		Thread.sleep(1000);
 		val.verifyResultWithProd(prodDriver);
-		
 		driver.quit();
 		prodDriver.quit();
 	}
@@ -143,12 +146,18 @@ public class ClassSearch_Filters_Automation {
 		
 	}
 	@Then("^The Results should contain only the classes of the session type\\(s\\) in the filter$")
-	public void verify_Session(){
+	public void verify_Session() throws Exception{
 		//String results=subject_number();
 		
 		String []sessions={"A","B","C","DYN"};
 		List<String> sessionSubset=new ArrayList<String>();
 		int n=sessions.length;
+		//Added code 07092017
+		List<WebElement> elasticSessionWrapper = this.driver.findElements(By.xpath("//*[@id='session-button']"));
+		if(!elasticSessionWrapper.isEmpty()) {
+			elasticSessionWrapper.get(0).click();
+		}
+		
 		for(int i=0;i<(1<<n);i++){
 			sessionSubset.clear();
 			for(int j=0;j<n;j++){
@@ -194,6 +203,17 @@ public class ClassSearch_Filters_Automation {
 		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String []locations=Arrays.copyOfRange(values, 2, values.length);
 		List<String> locationSubset=new ArrayList<String>();
+		//To click the location button so that the location options becomes visible
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> elasticSessionWrapper = this.driver.findElements(By.xpath("//*[@id='location-button']"));
+		if(!elasticSessionWrapper.isEmpty()) {
+			elasticSessionWrapper.get(0).click();
+		}
 		int n=locations.length;
 		for(int i=0;i<(1<<n);i++){
 			locationSubset.clear();
@@ -234,6 +254,12 @@ public class ClassSearch_Filters_Automation {
 		//String results=subject_number();
 		
 		String []locations={"Thunderbird"};
+		//To click the location button so that the location options becomes visible
+				WebElement elasticSessionWrapper = driver.findElement(By.xpath("//*[@id='location-button']"));
+				if(elasticSessionWrapper.isEnabled()) {
+					elasticSessionWrapper.click();
+				}
+				
 		List<String> locationSubset=new ArrayList<String>();
 		int n=locations.length;
 		for(int i=0;i<(1<<n);i++){
@@ -244,7 +270,7 @@ public class ClassSearch_Filters_Automation {
 				}
 			}
 			
-			System.out.print("\nVerifying with sessions ");
+			System.out.print("\nVerifying with sessions  :");
 			for(String s:locationSubset){
 				System.out.print(s+" ");
 			}
@@ -275,6 +301,11 @@ public class ClassSearch_Filters_Automation {
 		//String results=subject_number();
 		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String []locations=Arrays.copyOfRange(values, 1, values.length);
+		WebElement elasticSessionWrapper = driver.findElement(By.xpath("//*[@id='location-button']"));
+		if(elasticSessionWrapper.isEnabled()) {
+			elasticSessionWrapper.click();
+		}
+		
 		List<String> locationSubset=new ArrayList<String>();
 		int n=locations.length;
 		for(int i=0;i<(1<<n);i++){
@@ -289,7 +320,7 @@ public class ClassSearch_Filters_Automation {
 			for(String s:locationSubset){
 				System.out.print(s+" ");
 			}
-			System.out.println();
+			//System.out.println();
 			filters.filterByLocation(locationSubset);
 			prodFilters.filterByLocation(locationSubset);
 			val.verifyResultWithProd(prodDriver);
@@ -334,9 +365,14 @@ public class ClassSearch_Filters_Automation {
 		String []values=ClassSearchInputOLD.inputload(testCase).split(",");
 		String []days=Arrays.copyOfRange(values, 1, values.length);
 		List<String> daySubset=new ArrayList<String>();
-		filters.expandDaysFilter();
+		//filters.expandDaysFilter();
+		//To click the days button so that the days filter options becomes visible
+				List<WebElement> elasticSessionWrapper = this.driver.findElements(By.xpath("//*[@id='days-button']"));
+				if(!elasticSessionWrapper.isEmpty()) {
+					elasticSessionWrapper.get(0).click(); }
+					
 		prodFilters.expandDaysFilter();
-
+		
 		int n=days.length;
 		for(int i=0;i<(1<<n);i++){
 			daySubset.clear();
@@ -352,8 +388,16 @@ public class ClassSearch_Filters_Automation {
 			}
 			System.out.println();
 			
+		
+			
 			filters.filterByDaysOfWeek(daySubset);
 			prodFilters.filterByDaysOfWeek(daySubset);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			val.verifyResultWithProd(prodDriver);
 		}
 		
@@ -373,7 +417,10 @@ public class ClassSearch_Filters_Automation {
 		home.performsearch();
 		prodHome.performsearch();
 		
+		
 	}
+	
+
 	@Then("^All classes returned should start after the start time and end before end time$")
 	public void verify_Subject_Time(){
 		//String results=subject_number();
@@ -385,13 +432,20 @@ public class ClassSearch_Filters_Automation {
 			endTime=values[2];
 		}
 		
-		filters.expandTimeFilter();
+		//filters.expandTimeFilter();
 		prodFilters.expandTimeFilter();
-		
+		adv.clickAdvancedSearch();
 		filters.enterStartTime(startTime);
 		filters.enterEndTime(endTime);
 		prodFilters.enterStartTime(startTime);
 		prodFilters.enterEndTime(endTime);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		val.verifyResultWithProd(prodDriver);
 		
 		driver.quit();
 		prodDriver.quit();

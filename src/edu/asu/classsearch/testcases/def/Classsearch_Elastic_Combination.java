@@ -64,7 +64,7 @@ public class Classsearch_Elastic_Combination {
 	}
 	
 	@When("^User performs a search using any combination of fields$")
-	public void elastic_Combination_When(){
+	public void elastic_Combination_When() throws Exception{
 		
 		String []inputs=ClassSearchInputOLD.inputload(testCase).split(",");
 		adv.clickAdvancedSearch();
