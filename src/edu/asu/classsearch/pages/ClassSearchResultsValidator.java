@@ -10,6 +10,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import static org.hamcrest.Matchers.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -275,6 +276,19 @@ public class ClassSearchResultsValidator {
 
 	}
 
+	public void validateSearchTermError(String expectedErrorMessage) {
+		try {
+			validateSearchError("Please update your search criteria and try again.");
+		} catch(NoSuchElementException e) {
+			System.out.println("Search Error not present...Verifying elastic errors");
+			WebElement errorElement = this.driver.findElement(By.xpath("//*[@class='validation-error']"));
+			String errorString = errorElement.getText();
+			errorString = ("" + errorString).trim();
+			Assert.assertEquals(expectedErrorMessage, errorString);
+		}
+
+	}
+	
 	public void validateSearchError(String expectedErrorMessage) {
 		WebElement errorElement = this.driver.findElement(By.xpath("//*[@class='error_msg']"));
 		String errorString = errorElement.getText();
