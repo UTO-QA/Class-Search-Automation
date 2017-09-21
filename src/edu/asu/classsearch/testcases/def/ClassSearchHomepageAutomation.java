@@ -132,7 +132,7 @@ public class ClassSearchHomepageAutomation {
 
 	@Then("^A Warning should be Displayed for swapped scenario$")
 	public void test_subject_2_number() {
-		val.validateSearchError("Please update your search criteria and try again.");
+		val.validateSearchTermError("Please provide numbers only");
 		closeconnection();
 	}
 
@@ -148,7 +148,7 @@ public class ClassSearchHomepageAutomation {
 
 	@Then("^A Warning should be Displayed for correct Number Scenario$")
 	public void validation_number() {
-		val.validateSearchError("Please narrow your search by entering a subject, general studies or college.");
+		val.validateSearchTermError("Please narrow your search by entering a subject, general studies or college.");
 		closeconnection();
 	}
 
@@ -163,7 +163,7 @@ public class ClassSearchHomepageAutomation {
 
 	@Then("^A Warning should be Displayed for incorrect number scenario$")
 	public void validation_incorrect_number() {
-		val.validateSearchError("Please narrow your search by entering a subject, general studies or college.");
+		val.validateSearchTermError("Please narrow your search by entering a subject, general studies or college.");
 		closeconnection();
 	}
 
@@ -203,7 +203,7 @@ public class ClassSearchHomepageAutomation {
 
 		classSearchHomePageMethods.keyword(result2);
 		classSearchHomePageMethods.performsearch();
-		val.validateSearchError("Keywords must be longer.");
+		val.validateSearchTermError("Keyword must be longer");
 
 		closeconnection();
 	}
