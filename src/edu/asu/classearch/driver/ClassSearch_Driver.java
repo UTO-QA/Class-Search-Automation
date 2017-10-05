@@ -1,23 +1,58 @@
-package edu.asu.classearch.driver;
+package edu.asu.classsearch.driver;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import edu.asu.classsearch.pages.classearch_commons;
+public class ClassSearchDriver {
+	private final static Map<String, WebDriver> DRIVER_MAP = new HashMap<>();
 
-public class ClassSearch_Driver {
-	private  static final WebDriver driver=classearch_commons.getconn("https://webapp4-dev.asu.edu/elastic-catalog/");
-	private  static final WebDriver prodDriver=classearch_commons.getconn("https://webapp4-dev.asu.edu/catalog/");
-	
-	private ClassSearch_Driver() {
+	private ClassSearchDriver() {
+
+	}
+
+	public static WebDriver getDriver(String url) {
+		WebDriver driver = DRIVER_MAP.get(url);
+		if (driver == null) {
+			driver = new FirefoxDriver();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			driver.get(url);
+			DRIVER_MAP.put(url, driver);
+		}
+
+		return driver;
+	}
+
+	public static void quitDriver(String url) {
+		WebDriver driver = DRIVER_MAP.get(url);
+		if(driver != null) {
+			driver.quit();
+			DRIVER_MAP.remove(url);
+		}
 	}
 	
-	public static WebDriver getInstance(){
-		ClassSearch_Driver cd = new ClassSearch_Driver();
-		return driver;
-	} 
+	public static void quitAllDrivers() {
+		DRIVER_MAP.forEach((url, driver) -> {
+			driver.quit();
+		});
+		DRIVER_MAP.clear();
+	}
 	
-	public static WebDriver getProdInstance(){
-		ClassSearch_Driver cd = new ClassSearch_Driver();
-		return prodDriver;
-	} 
+	public static List<byte[]> getAllScreenShots() {
+		List<byte[]> screenshots = new ArrayList<>();
+		DRIVER_MAP.forEach((url, driver) -> {
+			screenshots.add(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
+		});
+		
+		return screenshots;
+	}
+
 }

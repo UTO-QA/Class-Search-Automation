@@ -1,12 +1,8 @@
 package edu.asu.classsearch.testcases.def;
 
 import org.junit.Assert;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -29,17 +25,6 @@ public class ClassSearchHomepageAutomation {
 
 	private ClassSearch_Filters filters;
 
-/*	@After
-	public void killBrowser(Scenario scenario) {
-		if (scenario.isFailed()) {
-			String scenarioName = scenario.getName();
-			String screenShotName = scenarioName.substring(0, scenarioName.indexOf(" ")) + "jpg";
-			scenario.embed(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), screenShotName);
-			driver.quit();
-		}
-		
-	}
-*/
 	// creates a connection
 	@Given("^The user is on Class Search page$")
 	public void getconnection() {

@@ -1,4 +1,4 @@
-Feature: Class Search verify Advanced Search
+Feature: Class Search verify Filter Search
 	
 
 	Scenario: TC_43 Verify Filter Search Criteria with In-Person & iCourses / ASU Online Classes Toggle

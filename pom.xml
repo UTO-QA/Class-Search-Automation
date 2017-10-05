@@ -11,8 +11,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -35,8 +35,8 @@
 						</goals>
 						<configuration>
 							<projectName>Class-Search Automation</projectName>
-							<outputDirectory>C:/Users/bsampat5/Selenium_Reports/cucumber-html-reports</outputDirectory>
-							<cucumberOutput>C:/Users/bsampat5/Selenium_Reports/cucumber.json</cucumberOutput>
+							<outputDirectory>C:/Users/udasu/Dropbox (ASU)/automation/Reports/cucumber-html-reports</outputDirectory>
+							<cucumberOutput>C:/Users/udasu/Dropbox (ASU)/automation/Reports/cucumber.json</cucumberOutput>
 							<parallelTesting>false</parallelTesting>
 						</configuration>
 					</execution>

@@ -62,7 +62,7 @@ public class classearch_commons {
 
 	// close a connection
 	public static void closeconn() {
-		driver.close();
+		driver.quit();
 	}
 
 	public WebDriver getDriver() {
