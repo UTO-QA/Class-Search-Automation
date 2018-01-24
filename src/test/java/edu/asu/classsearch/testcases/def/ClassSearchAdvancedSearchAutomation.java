@@ -8,7 +8,7 @@ import cucumber.api.java.en.When;
 import edu.asu.classsearch.pages.ClassSearch_AdvancedSearch;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
 import edu.asu.classsearch.driver.ClassSearchDriver;
-import edu.asu.classsearch.input.ClassSearchInputOLD;
+import edu.asu.classsearch.input.ClassSearchInputs;
 import edu.asu.classsearch.pages.ClassSearchResultsValidator;;
 
 public class ClassSearchAdvancedSearchAutomation {
@@ -26,13 +26,13 @@ public class ClassSearchAdvancedSearchAutomation {
 	// Creates a connection
 	@Given("^The user is on Class Search page Advanced Search$")
 	public void getconnection() {
-		driver = ClassSearchDriver.getDriver("https://webapp4-dev.asu.edu/elastic-catalog/");
+		driver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/elastic-catalog/");
 
 		adv = new ClassSearch_AdvancedSearch(driver);
 		val = new ClassSearchResultsValidator(driver);
 		home = new classearch_HomePage_Methods(driver);
 
-		prodDriver = ClassSearchDriver.getDriver("https://webapp4-dev.asu.edu/catalog/");
+		prodDriver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/catalog/");
 		prodAdv = new ClassSearch_AdvancedSearch(prodDriver);
 		prodHome = new classearch_HomePage_Methods(prodDriver);
 	}
@@ -41,7 +41,7 @@ public class ClassSearchAdvancedSearchAutomation {
 	@When("^User performs a search using the correct Subject and Instructor$")
 	public void positive_Subject_Instructor() {
 
-		String[] values = ClassSearchInputOLD.inputload("TC_22").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_22").split(",");
 		String subject = values[0];
 		String instructor = values[1];
 		validateString = new String[2];
@@ -71,7 +71,7 @@ public class ClassSearchAdvancedSearchAutomation {
 
 	@When("^User performs a search using a college/school$")
 	public void positive_CollegeSchool() {
-		String values[] = ClassSearchInputOLD.inputload("TC_23").split(",");
+		String values[] = ClassSearchInputs.inputload("TC_23").split(",");
 		String college = values[0];
 		validateString = new String[1];
 		validateString[0] = college;
@@ -96,7 +96,7 @@ public class ClassSearchAdvancedSearchAutomation {
 
 	@When("^User selects # of Units and subject and performs search$")
 	public void positive_NumofUnits() {
-		String values[] = ClassSearchInputOLD.inputload("TC_24").split(",");
+		String values[] = ClassSearchInputs.inputload("TC_24").split(",");
 		String subject = values[0];
 		String numUnits = values[1];
 		validateString = new String[2];
@@ -127,7 +127,7 @@ public class ClassSearchAdvancedSearchAutomation {
 
 	@When("^User selects Class # and subject and performs search$")
 	public void positive_ClassNumber() {
-		String values[] = ClassSearchInputOLD.inputload("TC_25").split(",");
+		String values[] = ClassSearchInputs.inputload("TC_25").split(",");
 		String subject = values[0];
 		String classNum = values[1];
 		validateString = new String[2];
@@ -157,7 +157,7 @@ public class ClassSearchAdvancedSearchAutomation {
 
 	@When("^User enters Start Date and subject and performs search$")
 	public void positive_StartDate() {
-		String values[] = ClassSearchInputOLD.inputload("TC_26").split(",");
+		String values[] = ClassSearchInputs.inputload("TC_26").split(",");
 		String subject = values[0];
 		String startDate = values[1];
 		validateString = new String[2];
@@ -188,7 +188,7 @@ public class ClassSearchAdvancedSearchAutomation {
 	// 27: User Enters correct subject and End Date
 	@When("^User performs a search using the correct Subject and End Date$")
 	public void Postive_EndDate() {
-		String[] values = ClassSearchInputOLD.inputload("TC_27").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_27").split(",");
 		String subject = values[0];
 		String endDate = values[1];
 		validateString = new String[2];
@@ -220,7 +220,7 @@ public class ClassSearchAdvancedSearchAutomation {
 	// 28: User Enters correct subject and checks Honors
 	@When("^User performs a search using the correct Subject and checks Honors check box$")
 	public void positive_Honors() {
-		String[] values = ClassSearchInputOLD.inputload("TC_28").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_28").split(",");
 		String subject = values[0];
 		validateString = new String[1];
 		validateString[0] = subject;
@@ -250,7 +250,7 @@ public class ClassSearchAdvancedSearchAutomation {
 	// 29: User Enters correct subject and checks Promod
 	@When("^User performs a search using the correct Subject and checks Project-based check box$")
 	public void positive_Promod() {
-		String[] values = ClassSearchInputOLD.inputload("TC_29").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_29").split(",");
 		String subject = values[0];
 		validateString = new String[1];
 		validateString[0] = subject;
@@ -280,7 +280,7 @@ public class ClassSearchAdvancedSearchAutomation {
 	// 30: User Searches using General studies
 	@When("^User performs a search using General Studies option$")
 	public void positive_GeneralStudies() {
-		String[] values = ClassSearchInputOLD.inputload("TC_30").split("&");
+		String[] values = ClassSearchInputs.inputload("TC_30").split("&");
 		String gs = values[0];
 		validateString = values;
 		adv.clickAdvancedSearch();
@@ -327,7 +327,7 @@ public class ClassSearchAdvancedSearchAutomation {
 	// 31: User Enters correct subject and level
 	@When("^User performs a search using Subject and Level$")
 	public void positive_Level() {
-		String[] values = ClassSearchInputOLD.inputload("TC_31").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_31").split(",");
 		String subject = values[0];
 		String level = values[1];
 		validateString = new String[2];

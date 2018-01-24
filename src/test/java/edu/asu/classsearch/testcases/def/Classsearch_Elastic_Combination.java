@@ -12,7 +12,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import edu.asu.classsearch.input.ClassSearchInputOLD;
+import edu.asu.classsearch.input.ClassSearchInputs;
 import edu.asu.classsearch.pages.ClassSearchResultsValidator;
 import edu.asu.classsearch.pages.ClassSearch_AdvancedSearch;
 import edu.asu.classsearch.pages.ClassSearch_Filters;
@@ -49,8 +49,8 @@ public class Classsearch_Elastic_Combination {
 
 	@Given("The User is on Class Search Page in Combination Scenario")
 	public void elastic_Combination() {
-		driver = ClassSearchDriver.getDriver("https://webapp4-dev.asu.edu/elastic-catalog");
-		prodDriver = ClassSearchDriver.getDriver("https://webapp4-dev.asu.edu/catalog");
+		driver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/elastic-catalog");
+		prodDriver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/catalog");
 
 		home = new classearch_HomePage_Methods(driver);
 		prodHome = new classearch_HomePage_Methods(prodDriver);
@@ -67,7 +67,7 @@ public class Classsearch_Elastic_Combination {
 	@When("^User performs a search using any combination of fields$")
 	public void elastic_Combination_When() throws Exception {
 
-		String[] inputs = ClassSearchInputOLD.inputload(testCase).split(",");
+		String[] inputs = ClassSearchInputs.inputload(testCase).split(",");
 		adv.clickAdvancedSearch();
 		prodAdv.clickAdvancedSearch();
 		for (int i = 0; i < inputs.length; i++) {

@@ -9,12 +9,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import edu.asu.classsearch.utils.CommonUtils;
+
 public class classearch_HomePage_Methods {
 	private WebDriver driver;
+	private CommonUtils cu;
 
 	public classearch_HomePage_Methods(WebDriver driver) {
 		// TODO Auto-generated constructor stub
 		this.driver = driver;
+		cu = new CommonUtils();
 	}
 
 	// Property for handling search button
@@ -281,8 +285,18 @@ public class classearch_HomePage_Methods {
 		Long mid = System.nanoTime();
 
 		String url = driver.getCurrentUrl();
-		url = url.substring(0, url.indexOf("classlist"));
-		System.out.println(url + " Search Time: " + TimeUnit.NANOSECONDS.toSeconds(mid - start) + "s");
+		Long elapsedTime = TimeUnit.NANOSECONDS.toMillis(mid - start);
+		updateSearchTime(elapsedTime, url);
+		System.out.println("SEARCH TIME:" + url + " : " + elapsedTime + "ms");
+	}
+	
+	public void updateSearchTime(Long elapsedTime, String url) {
+		
+		if (url.contains("elastic-catalog")) {
+			cu.addElasticSearchTime(elapsedTime);
+		} else {
+			cu.addProdSearchTime(elapsedTime);
+		}
 	}
 
 	public void addcourse() {

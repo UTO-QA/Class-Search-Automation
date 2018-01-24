@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import edu.asu.classsearch.input.ClassSearchInputOLD;
+import edu.asu.classsearch.input.ClassSearchInputs;
 import edu.asu.classsearch.pages.ClassSearchResultsValidator;
 import edu.asu.classsearch.pages.ClassSearch_Filters;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
@@ -28,7 +28,7 @@ public class ClassSearchHomepageAutomation {
 	// creates a connection
 	@Given("^The user is on Class Search page$")
 	public void getconnection() {
-		this.driver = classearch_commons.getconn("https://webapp4-dev.asu.edu/elastic-catalog/");
+		this.driver = classearch_commons.getconn("https://webapp4-qa.asu.edu/elastic-catalog/");
 		this.classSearchHomePageMethods = new classearch_HomePage_Methods(driver);
 		this.val = new ClassSearchResultsValidator(driver);
 		this.filters = new ClassSearch_Filters(this.driver);
@@ -42,7 +42,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST1: CHECK if course accepts Positive Subject
 	@When("^User enters Correct Subject$")
 	public void Postive1_subject() {
-		String[] values = ClassSearchInputOLD.inputload("TC_1").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_1").split(",");
 		String searchterm = values[0];
 		validateString = searchterm;
 		classSearchHomePageMethods.subject(searchterm);
@@ -58,7 +58,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST2: CHECK if course rejects Negative Subject
 	@When("^User enters Incorrect Subject$")
 	public void incorrect_subject1() {
-		String[] values = ClassSearchInputOLD.inputload("TC_2").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_2").split(",");
 		String searchterm = values[0];
 		classSearchHomePageMethods.subject(searchterm);
 		classSearchHomePageMethods.performsearch();
@@ -73,7 +73,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST3: CHECK if course accepts Positive Subject and Number
 	@When("^User enters correct Subject and Number$")
 	public void subject_number() {
-		String[] values = ClassSearchInputOLD.inputload("TC_3").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_3").split(",");
 		String searchterm = values[0];
 		String number = values[1];
 		validateString = searchterm + " " + number;
@@ -90,7 +90,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST4: CHECK if course rejects Incorrect Subject and Incorrect Number
 	@When("^User enters incorrect Subject and incorrect Number$")
 	public void subject1_number() {
-		String[] values = ClassSearchInputOLD.inputload("TC_4").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_4").split(",");
 		String searchterm = values[0];
 		String number = values[1];
 		classSearchHomePageMethods.subjectandnumber(searchterm, number);
@@ -107,7 +107,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST5: CHECK if course rejects Negative Subject and Number
 	@When("^User enters swapped values for Subject and Number$")
 	public void subject_2_number() {
-		String[] values = ClassSearchInputOLD.inputload("TC_5").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_5").split(",");
 		String searchterm = values[0];
 		String number = values[1];
 		classSearchHomePageMethods.subjectandnumber(searchterm, number);
@@ -124,7 +124,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST 6:CHECK if search by only Number works
 	@When("^User enters correct Number$")
 	public void test_number() {
-		String[] values = ClassSearchInputOLD.inputload("TC_6").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_6").split(",");
 		String number = values[0];
 
 		classSearchHomePageMethods.Number(number);
@@ -140,7 +140,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST 7: CHECK if search by incorrect number displays a warning message
 	@When("^User enters incorrect Number$")
 	public void check_incorrect_number() {
-		String[] values = ClassSearchInputOLD.inputload("TC_7").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_7").split(",");
 		String number = values[0];
 		classSearchHomePageMethods.Number(number);
 		classSearchHomePageMethods.performsearch();
@@ -155,7 +155,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST 8: Verify that search with only keyword produces results
 	@When("^User performs a search using only the correct keyword$")
 	public void keyword() {
-		String[] values = ClassSearchInputOLD.inputload("TC_8").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_8").split(",");
 		String keyword = values[0];
 		this.result = keyword;
 		classSearchHomePageMethods.keyword(keyword);
@@ -173,7 +173,7 @@ public class ClassSearchHomepageAutomation {
 	// warning message
 	@When("^User performs a search using only the incorrect keyword or keyword with less than 3 letters$")
 	public void incorrect_keyword() {
-		String[] values = ClassSearchInputOLD.inputload("TC_9").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_9").split(",");
 		String keyword = values[0];
 		String keyword_lim = values[1];
 		this.result2 = keyword_lim;
@@ -197,7 +197,7 @@ public class ClassSearchHomepageAutomation {
 	// Search results
 	@When("^User performs a search using the correct keyword and correct Subject$")
 	public void correct_keyword_Subject() {
-		String[] values = ClassSearchInputOLD.inputload("TC_10").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_10").split(",");
 		String Subject = values[0];
 		String keyword = values[1];
 		validateString = Subject;
@@ -216,7 +216,7 @@ public class ClassSearchHomepageAutomation {
 	// Search results
 	@When("^User performs a search using the incorrect keyword or Subject$")
 	public void incorrect_keyword_Subject() {
-		String[] values = ClassSearchInputOLD.inputload("TC_11").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_11").split(",");
 		String Subject = values[0];
 		String keyword = values[1];
 		classSearchHomePageMethods.keywordanddsubject(Subject, keyword);
@@ -234,7 +234,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST 12: Verify that toggle the radio button changes the results
 	@When("^User selects for open classes and performs a search$")
 	public void toggleradio_open() {
-		String[] values = ClassSearchInputOLD.inputload("TC_12").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_12").split(",");
 		String term = values[0];
 		String subject = values[1];
 		String open = values[2];
@@ -254,7 +254,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST 13: Verify that toggle the radio button changes the results
 	@When("^User selects for all classes and performs a search$")
 	public void toggleradio_all() {
-		String[] values = ClassSearchInputOLD.inputload("TC_13").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_13").split(",");
 		String term = values[0];
 		String subject = values[1];
 		String all = values[2];
@@ -275,7 +275,7 @@ public class ClassSearchHomepageAutomation {
 	// in-Person is selected
 	@When("^User selects for in-person and performs a search$")
 	public void toggleradio_campus() {
-		String[] values = ClassSearchInputOLD.inputload("TC_14").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_14").split(",");
 		String campus = values[0];
 		String sem = values[1];
 		String subject = values[2];
@@ -297,7 +297,7 @@ public class ClassSearchHomepageAutomation {
 	// when online is selected
 	@When("^User selects for online and performs a search$")
 	public void toggleradio_online() {
-		String[] values = ClassSearchInputOLD.inputload("TC_15").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_15").split(",");
 		String campus = values[0];
 		String sem = values[1];
 		String subject = values[2];
@@ -318,7 +318,7 @@ public class ClassSearchHomepageAutomation {
 	// TEST 16:
 	@When("^User selects Session A and performs a search$")
 	public void Session_A() throws Exception {
-		String[] values = ClassSearchInputOLD.inputload("TC_16").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_16").split(",");
 		String campus = values[0];
 		String sem = values[1];
 		String subject = values[2];
@@ -342,7 +342,7 @@ public class ClassSearchHomepageAutomation {
 
 	@When("^User selects Session B and performs a search$")
 	public void Session_B()  throws Exception  {
-		String[] values = ClassSearchInputOLD.inputload("TC_16").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_16").split(",");
 		String campus = values[0];
 		String sem = values[1];
 		String subject = values[2];
@@ -367,7 +367,7 @@ public class ClassSearchHomepageAutomation {
 
 	@When("^User selects Session C and performs a search$")
 	public void Session_C()  throws Exception  {
-		String[] values = ClassSearchInputOLD.inputload("TC_16").split(",");
+		String[] values = ClassSearchInputs.inputload("TC_16").split(",");
 		String campus = values[0];
 		String sem = values[1];
 		String subject = values[2];

@@ -8,11 +8,11 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import edu.asu.classsearch.driver.ClassSearchDriver;
-import edu.asu.classsearch.input.ClassSearchInputOLD;
+import edu.asu.classsearch.input.ClassSearchInputs;
 import edu.asu.classsearch.pages.ClassSearchResultsValidator;
 import edu.asu.classsearch.pages.classearch_HomePage_Methods;
 
-public class ClassSearch_KeywordSearch {
+public class ClassSearchKeywordSearch {
 
 	WebDriver driver, prodDriver;
 	classearch_HomePage_Methods home, prodHome;
@@ -29,8 +29,8 @@ public class ClassSearch_KeywordSearch {
 
 	@Given("^The user is on Class Search page to search using Keyword$")
 	public void getconnection() {
-		driver = ClassSearchDriver.getDriver("https://webapp4-dev.asu.edu/elastic-catalog/");
-		prodDriver = ClassSearchDriver.getDriver("https://webapp4-dev.asu.edu/catalog/");
+		driver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/elastic-catalog/");
+		prodDriver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/catalog/");
 
 		val = new ClassSearchResultsValidator(driver);
 		home = new classearch_HomePage_Methods(driver);
@@ -41,7 +41,7 @@ public class ClassSearch_KeywordSearch {
 	@When("^User performs a search using Search by Keyword$")
 	public void positive_Keyword_3CharSearch_Subject() {
 
-		String[] values = ClassSearchInputOLD.inputload(testCase).split(",");
+		String[] values = ClassSearchInputs.inputload(testCase).split(",");
 		String subject = values[0];
 		this.validateString = new String[1];
 		this.validateString[0] = subject;
@@ -112,8 +112,8 @@ public class ClassSearch_KeywordSearch {
 
 		// Compare the results with a new search that matches the Subject formal
 		// description
-		WebDriver driver2 = ClassSearchDriver.getDriver("https://webapp4-dev.asu.edu/elastic-catalog");
-		String[] values = ClassSearchInputOLD.inputload(testCase).split(",");
+		WebDriver driver2 = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/elastic-catalog");
+		String[] values = ClassSearchInputs.inputload(testCase).split(",");
 		String subject = values[1];
 		home = new classearch_HomePage_Methods(driver2);
 
@@ -121,8 +121,7 @@ public class ClassSearch_KeywordSearch {
 		home.performsearch();
 
 		val.verifyResultWithProd(driver2);
-		driver2.quit();
-
+		
 		val.verifyResultWithProd(prodDriver);
 		// MatcherAssert.assertThat(results,CoreMatchers.containsString("Showing"));
 		// TODO: how to check subject is correct.

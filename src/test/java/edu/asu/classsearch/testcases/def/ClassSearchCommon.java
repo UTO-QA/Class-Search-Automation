@@ -4,7 +4,9 @@ import java.util.List;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.en.When;
 import edu.asu.classsearch.driver.ClassSearchDriver;
+import edu.asu.classsearch.utils.CommonUtils;
 
 public class ClassSearchCommon {
 	@After
@@ -16,5 +18,11 @@ public class ClassSearchCommon {
 
 		ClassSearchDriver.quitAllDrivers();
 
+	}
+
+	@When("^Compare and Print search times$")
+	public void compareAndPrintTimes() {
+		CommonUtils commonUtils = new CommonUtils();
+		System.out.println(commonUtils.getSearchStatistics());
 	}
 }
