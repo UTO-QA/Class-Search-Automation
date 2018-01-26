@@ -260,6 +260,23 @@ public class ClassSearchResultsValidator {
 
 	}
 
+	public void verifyResultFromLocations(WebDriver prodDriver) {
+
+	List<String> tableColumnIDList = new ArrayList<String>();
+
+		// Verify just the subject column
+		tableColumnIDList.addAll(Arrays.asList("subjectNumberColumnValue"));
+		System.out.println("Starting to check the result size");
+		for (String td : tableColumnIDList) {
+
+			List<WebElement> wList2 = prodDriver.findElements(By.className(td));
+			MatcherAssert.assertThat(wList2, hasSize(0));
+
+		}
+
+		System.out.println("College present");
+
+	}
 	public void validateClassTitleAndIns(String title) {
 		List<WebElement> classTitleList = this.driver.findElements(By.className("titleColumnValue"));
 		List<WebElement> instructorList = this.driver.findElements(By.className("instructorListColumnValue"));

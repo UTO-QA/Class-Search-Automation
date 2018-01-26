@@ -58,6 +58,18 @@ public class ClassSearch_Filters_Automation {
 		prodHome = new classearch_HomePage_Methods(prodDriver);
 	}
 
+	// creates a connection for the present qa
+	@Given("^The user is on Class Search page Filter Search prod$")
+	public void getConnections() {
+		prodDriver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/catalog/");
+		val = new ClassSearchResultsValidator(driver);
+		prodFilters = new ClassSearch_Filters(prodDriver);
+		prodAdv = new ClassSearch_AdvancedSearch(prodDriver);
+		prodHome = new classearch_HomePage_Methods(prodDriver);
+
+	}
+
+
 	// TC_43
 	@When("^User toggles the In-Person & iCourses/ASU Online Classes toggle to ASU Online Classes$")
 	public void filters_ASUOnline() {
@@ -447,4 +459,57 @@ public class ClassSearch_Filters_Automation {
 		val.verifyResultWithProd(prodDriver);
 
 	}
+
+
+	// TC_52
+	@When("^User performs a search with subject and applies Location filter current$")
+	public void filtersSubjectLocation() {
+		String[] values = ClassSearchInputs.inputload(testCase).split(",");
+		String subject = values[0];
+		prodHome.subject(subject);
+		prodHome.performsearch();
+	}
+
+	@Then("^Results should return for locations matching the filter current$")
+	public void verifySubjectLocationCurrent() throws InterruptedException {
+		// String results=subject_number();
+		System.out.println("lol"+testCase);
+		String[] values = ClassSearchInputs.inputload(testCase).split(",");
+		String[] locations = Arrays.copyOfRange(values, 1, values.length);
+		WebElement elasticSessionWrapper = prodDriver.findElement(By.xpath("//*[@id='location-button']"));
+		if (elasticSessionWrapper.isEnabled()) {
+			elasticSessionWrapper.click();
+		}
+
+		List<String> locationSubset = new ArrayList<String>();
+		int n = locations.length;
+		for (int i = 0; i < (1 << n); i++) {
+			locationSubset.clear();
+			for (int j = 0; j < n; j++) {
+				if ((i & (1 << j)) > 0) {
+					locationSubset.add(locations[j]);
+				}
+			}
+
+			System.out.print("\nVerifying with sessions ");
+			for (String s : locationSubset) {
+				System.out.print(s + " ");
+			}
+			System.out.println("prod filter");
+			if(locationSubset.size()==0)
+				continue;
+			prodFilters.filterByLocation(locationSubset);
+
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			val.verifyResultFromLocations(prodDriver);
+		}
+
+	}
+
+
 }

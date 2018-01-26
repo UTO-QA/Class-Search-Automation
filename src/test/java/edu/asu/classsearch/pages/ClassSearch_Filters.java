@@ -26,6 +26,9 @@ public class ClassSearch_Filters {
 		put("Tucson",			 "//*[@id='TUCSON']");
 		put("iCourse (online)",  "//*[@id='ICOURSE']");
 		put("Off-Campus",		 "//*[@id='OFFCAMP']");
+		put("Cochise College",		 "//*[@id='COCHISE']");
+		put("Central AZ College",		 "//*[@id='CAC']");
+		put("Lake Havasu",		 "//*[@id='CALHC']");
 //		put("All locations",	 "//*[@id='ALL']");
 	}};
 	
