@@ -5,6 +5,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.asu.classsearch.driver.ClassSearchDriver;
 import edu.asu.classsearch.input.ClassSearchInputs;
 import edu.asu.classsearch.pages.ClassSearchResultsValidator;
 import edu.asu.classsearch.pages.ClassSearch_Filters;
@@ -42,7 +43,8 @@ public class ClassSearchHomepageAutomation {
     // creates a connection
     @Given("^The user is on Class Search page$")
     public void getconnection() {
-        this.driver = classearch_commons.getconn("https://webapp4.asu.edu/catalog/");
+        String url1 = ClassSearchInputs.inputload("URL_1");
+        this.driver = classearch_commons.getconn(url1);
         this.classSearchHomePageMethods = new classearch_HomePage_Methods(driver);
         this.val = new ClassSearchResultsValidator(driver);
         this.filters = new ClassSearch_Filters(this.driver);

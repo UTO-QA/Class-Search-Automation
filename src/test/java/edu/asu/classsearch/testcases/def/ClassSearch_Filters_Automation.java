@@ -45,8 +45,11 @@ public class ClassSearch_Filters_Automation {
 	// creates a connection
 	@Given("^The user is on Class Search page Filter Search$")
 	public void getconnection() {
-		driver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/elastic-catalog/");
-		prodDriver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/catalog/");
+		String url1 = ClassSearchInputs.inputload("URL_1");
+		String url2 = ClassSearchInputs.inputload("URL_2");
+
+		driver = ClassSearchDriver.getDriver(url1);
+		prodDriver = ClassSearchDriver.getDriver(url2);
 
 		val = new ClassSearchResultsValidator(driver);
 		home = new classearch_HomePage_Methods(driver);

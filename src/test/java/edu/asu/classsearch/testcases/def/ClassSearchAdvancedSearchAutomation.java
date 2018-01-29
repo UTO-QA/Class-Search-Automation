@@ -26,13 +26,16 @@ public class ClassSearchAdvancedSearchAutomation {
 	// Creates a connection
 	@Given("^The user is on Class Search page Advanced Search$")
 	public void getconnection() {
-		driver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/elastic-catalog/");
+		String url1 = ClassSearchInputs.inputload("URL_1");
+		String url2 = ClassSearchInputs.inputload("URL_2");
+
+		driver = ClassSearchDriver.getDriver(url1);
 
 		adv = new ClassSearch_AdvancedSearch(driver);
 		val = new ClassSearchResultsValidator(driver);
 		home = new classearch_HomePage_Methods(driver);
 
-		prodDriver = ClassSearchDriver.getDriver("https://webapp4-qa.asu.edu/catalog/");
+		prodDriver = ClassSearchDriver.getDriver(url2);
 		prodAdv = new ClassSearch_AdvancedSearch(prodDriver);
 		prodHome = new classearch_HomePage_Methods(prodDriver);
 	}
