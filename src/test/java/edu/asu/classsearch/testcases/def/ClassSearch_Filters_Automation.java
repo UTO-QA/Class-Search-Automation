@@ -473,7 +473,6 @@ public class ClassSearch_Filters_Automation {
 	@Then("^Results should return for locations matching the filter current$")
 	public void verifySubjectLocationCurrent() throws InterruptedException {
 		// String results=subject_number();
-		System.out.println("lol"+testCase);
 		String[] values = ClassSearchInputs.inputload(testCase).split(",");
 		String[] locations = Arrays.copyOfRange(values, 1, values.length);
 		WebElement elasticSessionWrapper = prodDriver.findElement(By.xpath("//*[@id='location-button']"));
