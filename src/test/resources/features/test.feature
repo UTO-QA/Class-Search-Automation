@@ -1,4 +1,4 @@
 Feature: Generate Statistics
-    Scenario: TC_55_CC-921 Revert catalog number logic
-        Given The user is on Class Search page
-        Then User is able to search using a wildcard in number field
+    Scenario: TC_60 Verify Filter Search Criteria with Filter By Location and without subject
+        Given The user is on Class Search page Filter Search prod
+        Then Results should return for locations matching the filter current having size

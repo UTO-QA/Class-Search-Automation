@@ -473,6 +473,48 @@ public class ClassSearch_Filters_Automation {
 		prodHome.performsearch();
 	}
 
+
+	@Then("^Results should return for locations matching the filter current having size$")
+	public void verifySubjectLocationCurrentSize() throws InterruptedException {
+		// String results=subject_number();
+		String[] values = ClassSearchInputs.inputload(testCase).split(",");
+		String[] locations = Arrays.copyOfRange(values, 0, values.length);
+		WebElement elasticSessionWrapper = prodDriver.findElement(By.xpath("//*[@id='location-button']"));
+		if (elasticSessionWrapper.isEnabled()) {
+			elasticSessionWrapper.click();
+		}
+
+		List<String> locationSubset = new ArrayList<String>();
+		int n = locations.length;
+		for (int i = 1; i < (1 << n); i++) {
+			locationSubset.clear();
+			for (int j = 0; j < n; j++) {
+				if ((i & (1 << j)) > 0) {
+					locationSubset.add(locations[j]);
+				}
+			}
+			if(locationSubset.size()==0)
+				continue;
+			System.out.print("\nVerifying with sessions ");
+			for (String s : locationSubset) {
+				System.out.print(s + " ");
+			}
+			System.out.println("prod filter");
+
+			prodFilters.filterByLocation(locationSubset);
+
+			try {
+				Thread.sleep(1000);
+				val.verifyResultFromLocations100(prodDriver);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
 	@Then("^Results should return for locations matching the filter current$")
 	public void verifySubjectLocationCurrent() throws InterruptedException {
 		// String results=subject_number();
@@ -485,30 +527,31 @@ public class ClassSearch_Filters_Automation {
 
 		List<String> locationSubset = new ArrayList<String>();
 		int n = locations.length;
-		for (int i = 0; i < (1 << n); i++) {
+		for (int i = 1; i < (1 << n); i++) {
 			locationSubset.clear();
 			for (int j = 0; j < n; j++) {
 				if ((i & (1 << j)) > 0) {
 					locationSubset.add(locations[j]);
 				}
 			}
-
+			if(locationSubset.size()==0)
+				continue;
 			System.out.print("\nVerifying with sessions ");
 			for (String s : locationSubset) {
 				System.out.print(s + " ");
 			}
 			System.out.println("prod filter");
-			if(locationSubset.size()==0)
-				continue;
+
 			prodFilters.filterByLocation(locationSubset);
 
 			try {
 				Thread.sleep(1000);
+				val.verifyResultFromLocations(prodDriver);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			val.verifyResultFromLocations(prodDriver);
+
 		}
 
 	}

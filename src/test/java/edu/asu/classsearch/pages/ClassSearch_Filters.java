@@ -19,7 +19,7 @@ public class ClassSearch_Filters {
 		put("Downtown", 		 "//*[@id='DTPHX']");
 		put("Polytechnic",		 "//*[@id='POLY']");
 		put("Tempe",			 "//*[@id='TEMPE']");
-		put("Thunderbird",		 "//*[@id='TBIRD']");
+		//put("Thunderbird",		 "//*[@id='TBIRD']");
 		put("West",				 "//*[@id='WEST']");
 		put("AZ Western College","//*[@id='AWC']");
 		put("Eastern AZ College","//*[@id='EAC']");
@@ -182,13 +182,18 @@ public class ClassSearch_Filters {
 			}
 		}
 	}
-	public void filterByLocation(List<String> locations){
+	public void filterByLocation(List<String> locations)  {
 		
 		unCheckLocations();
 		for(String loc:locations){
 			WebElement elem=locationFilter(locationxPath.get(loc));
 			elem.click();
 			
+		}
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 	

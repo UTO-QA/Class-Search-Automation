@@ -38,3 +38,7 @@ Feature: CC-941 Automated testing for Jan 2018
         Given The user is on Class Search page
         When User enters correct Subject and Number
         Then Clicking on Class record must return the drawer or details page experiences
+
+    Scenario: TC_60 Verify Filter Search Criteria with Filter By Location and without subject
+        Given The user is on Class Search page Filter Search prod
+        Then Results should return for locations matching the filter current having size
